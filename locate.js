@@ -6,11 +6,11 @@ module.exports.gP = gP // Finds exact postal district (approximate at boundaries
 module.exports.gSt = gSt // Finds nearest station marker (within 500m)
 module.exports.gSu = gSu // Finds nearest suburb marker (unbounded)
 
-const postcodes = require('./data/Postcodes.json') // Doogal postcode polygons
-const boroughs = require('./data/Boroughs.json') // Data.gov borough polygons
-const suburbs = require('./data/Suburbs.json').features // OSM suburb/town nodes (modified)
-const stations = require('./data/Stations.json').features // OSM railway station nodes (expanded)
-const boroughDict = require('./data/boroughDict.json') // Three-letter codes for boroughs
+const postcodes = require('./data/geo/Postcodes.json') // Doogal postcode polygons
+const boroughs = require('./data/geo/Boroughs.json') // Data.gov borough polygons
+const suburbs = require('./data/geo/Suburbs.json').features // OSM suburb/town nodes (modified)
+const stations = require('./data/geo/Stations.json').features // OSM railway station nodes (expanded)
+const boroughDict = require('./data/geo/boroughDict.json') // Three-letter codes for boroughs
 console.log("Loaded geographical data.") // ~ 13MB
 
 // wrapper for turf-inside (point in polygon algorithm)

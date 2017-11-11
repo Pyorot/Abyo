@@ -16,7 +16,7 @@ Data comes from these sources.
 - **Suburbs** – OpenStreetMap (modified)
 
 I processed the data as follows (the format is GeoJson). I made up the borough codes myself.
-- **Postcodes.json** contains polygons all postal districts in the areas [London postal area], WD, EN, IG, RM, DA, BR, CR,SM, KT, TW, UB.
+- **Postcodes.json** contains polygons all postal districts in the areas [London postal area], WD, HA, EN, IG, RM, DA, BR, CR,SM, KT, TW, UB.
 - **Boroughs.json** contains all local authority districts in the ceremonial counties Greater London, Buckinghamshire, Hertfordshire, Essex, Kent, Surrey, Berkshire.
 - **Stations.json** contains all rail stations (except tram) within the M25; some may be missing (let me know).
 - **Suburbs.json** contains place=suburb/town nodes from OSM, heavily modified by me to improve usefulness and accuracy.
