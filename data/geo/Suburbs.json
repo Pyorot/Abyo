@@ -209,7 +209,7 @@
 			},
 			"geometry": {
 				"type": "Point",
-				"coordinates": [-0.4334413, 51.4530683]
+				"coordinates": [-0.4348611831665039, 51.450984920901824]
 			},
 			"id": "node/17061656"
 		}, {
@@ -1553,7 +1553,7 @@
 			},
 			"geometry": {
 				"type": "Point",
-				"coordinates": [-0.3216623, 51.4863958]
+				"coordinates": [-0.3137540817260742, 51.48512443042995]
 			},
 			"id": "node/27365513"
 		}, {
@@ -2026,7 +2026,7 @@
 			},
 			"geometry": {
 				"type": "Point",
-				"coordinates": [-0.3263111, 51.4683558]
+				"coordinates": [-0.3293752670288086, 51.471546541834144]
 			},
 			"id": "node/27529290"
 		}, {
@@ -2399,7 +2399,7 @@
 			},
 			"geometry": {
 				"type": "Point",
-				"coordinates": [0.0810702, 51.622383]
+				"coordinates": [0.07844924926757812, 51.62036135325299]
 			},
 			"id": "node/27731564"
 		}, {
@@ -2474,7 +2474,7 @@
 			},
 			"geometry": {
 				"type": "Point",
-				"coordinates": [0.0924286, 51.4804635]
+				"coordinates": [0.09158134460449219, 51.483627853536014]
 			},
 			"id": "node/27732676"
 		}, {
@@ -2876,37 +2876,9 @@
 			},
 			"geometry": {
 				"type": "Point",
-				"coordinates": [0.1615162, 51.599912]
+				"coordinates": [0.16376495361328125, 51.59733439153138]
 			},
 			"id": "node/52706783"
-		}, {
-			"type": "Feature",
-			"properties": {
-				"@id": "node/55571766",
-				"name": "Burpham",
-				"place": "suburb",
-				"wikidata": "Q5000292"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [-0.5450315, 51.2582851]
-			},
-			"id": "node/55571766"
-		}, {
-			"type": "Feature",
-			"properties": {
-				"@id": "node/55571769",
-				"is_in": "Guildford, Surrey",
-				"name": "Merrow",
-				"note": "Location of Merrow Sign",
-				"place": "suburb",
-				"wikidata": "Q6820382"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [-0.5335147, 51.2443481]
-			},
-			"id": "node/55571769"
 		}, {
 			"type": "Feature",
 			"properties": {
@@ -3128,20 +3100,6 @@
 		}, {
 			"type": "Feature",
 			"properties": {
-				"@id": "node/133226366",
-				"created_by": "JOSM",
-				"name": "Slyfield",
-				"place": "suburb",
-				"source": "npe"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [-0.5685139, 51.257909]
-			},
-			"id": "node/133226366"
-		}, {
-			"type": "Feature",
-			"properties": {
 				"@id": "node/138187664",
 				"is_in": "Croydon, London",
 				"name": "Shirley",
@@ -3360,19 +3318,6 @@
 		}, {
 			"type": "Feature",
 			"properties": {
-				"@id": "node/267741053",
-				"name": "Westfield",
-				"place": "suburb",
-				"wikidata": "Q16248754"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [-0.5594671, 51.3024593]
-			},
-			"id": "node/267741053"
-		}, {
-			"type": "Feature",
-			"properties": {
 				"@id": "node/269611584",
 				"name": "Hadley Wood",
 				"place": "suburb",
@@ -3404,20 +3349,6 @@
 		}, {
 			"type": "Feature",
 			"properties": {
-				"@id": "node/288249904",
-				"name": "Hurst Green",
-				"place": "suburb",
-				"source": "npe",
-				"wikidata": "Q1610474"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [0.0022244, 51.2436831]
-			},
-			"id": "node/288249904"
-		}, {
-			"type": "Feature",
-			"properties": {
 				"@id": "node/297805659",
 				"name": "Hampton",
 				"place": "suburb",
@@ -3428,19 +3359,6 @@
 				"coordinates": [-0.3691409, 51.4150272]
 			},
 			"id": "node/297805659"
-		}, {
-			"type": "Feature",
-			"properties": {
-				"@id": "node/303928104",
-				"name": "Woodlands",
-				"place": "suburb",
-				"wikidata": "Q8032907"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [-0.3374321, 51.4721654]
-			},
-			"id": "node/303928104"
 		}, {
 			"type": "Feature",
 			"properties": {
@@ -3683,84 +3601,6 @@
 				"coordinates": [-0.0535056, 51.4615309]
 			},
 			"id": "node/409700968"
-		}, {
-			"type": "Feature",
-			"properties": {
-				"@id": "node/410414097",
-				"name": "Chipstead",
-				"place": "suburb",
-				"source": "npe",
-				"wikidata": "Q5101745"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [0.1507705, 51.283835]
-			},
-			"id": "node/410414097"
-		}, {
-			"type": "Feature",
-			"properties": {
-				"@id": "node/410414098",
-				"name": "St John's",
-				"place": "suburb",
-				"source": "npe"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [0.1960469, 51.2834527]
-			},
-			"id": "node/410414098"
-		}, {
-			"type": "Feature",
-			"properties": {
-				"@id": "node/410414376",
-				"name": "West Heath",
-				"place": "suburb",
-				"source": "road_sign"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [0.1810988, 51.2608431]
-			},
-			"id": "node/410414376"
-		}, {
-			"type": "Feature",
-			"properties": {
-				"@id": "node/410647948",
-				"name": "Greatness",
-				"place": "suburb"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [0.1992177, 51.2900206]
-			},
-			"id": "node/410647948"
-		}, {
-			"type": "Feature",
-			"properties": {
-				"@id": "node/410648677",
-				"name": "Wildernesse",
-				"place": "suburb",
-				"source": "npe"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [0.2173846, 51.2842505]
-			},
-			"id": "node/410648677"
-		}, {
-			"type": "Feature",
-			"properties": {
-				"@id": "node/410648766",
-				"name": "Kippington",
-				"place": "suburb",
-				"source": "npe"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [0.1786321, 51.2670418]
-			},
-			"id": "node/410648766"
 		}, {
 			"type": "Feature",
 			"properties": {
@@ -4240,59 +4080,6 @@
 				"coordinates": [-0.24401664733886716, 51.391011931141186]
 			},
 			"id": "node/1139095970"
-		}, {
-			"type": "Feature",
-			"properties": {
-				"@id": "node/1157717825",
-				"is_in": "Rickmansworth",
-				"name": "Berry Lane Estate",
-				"place": "suburb"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [-0.4962994, 51.6443225]
-			},
-			"id": "node/1157717825"
-		}, {
-			"type": "Feature",
-			"properties": {
-				"@id": "node/1166364131",
-				"is_in": "Rickmansworth",
-				"name": "Mill End",
-				"place": "suburb",
-				"wikidata": "Q15253399"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [-0.4927717, 51.6371126]
-			},
-			"id": "node/1166364131"
-		}, {
-			"type": "Feature",
-			"properties": {
-				"@id": "node/1189132201",
-				"is_in": "Rickmansworth",
-				"name": "The Cedars Estate",
-				"place": "suburb"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [-0.4816778, 51.6400899]
-			},
-			"id": "node/1189132201"
-		}, {
-			"type": "Feature",
-			"properties": {
-				"@id": "node/1189174048",
-				"is_in": "Rickmansworth",
-				"name": "Moneyhill",
-				"place": "suburb"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [-0.4839047, 51.6372003]
-			},
-			"id": "node/1189174048"
 		}, {
 			"type": "Feature",
 			"properties": {
@@ -4977,18 +4764,6 @@
 		}, {
 			"type": "Feature",
 			"properties": {
-				"@id": "node/1756264132",
-				"name": "Carterhatch",
-				"place": "suburb"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [-0.0619306, 51.6610068]
-			},
-			"id": "node/1756264132"
-		}, {
-			"type": "Feature",
-			"properties": {
 				"@id": "node/1756268163",
 				"name": "Enfield Island Village",
 				"place": "suburb",
@@ -5043,8 +4818,11 @@
 		}, {
 			"type": "Feature",
 			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
 				"@id": "node/1787971132",
-				"name": "Croxley Green",
+				"name": "Croxley",
 				"place": "suburb",
 				"wikidata": "Q9666"
 			},
@@ -5250,7 +5028,7 @@
 			},
 			"geometry": {
 				"type": "Point",
-				"coordinates": [-0.3290769, 51.389182]
+				"coordinates": [-0.333709716796875, 51.38860173348145]
 			},
 			"id": "node/2142743531"
 		}, {
@@ -5559,43 +5337,6 @@
 		}, {
 			"type": "Feature",
 			"properties": {
-				"@id": "node/2278539088",
-				"name": "Montreal Park",
-				"place": "suburb",
-				"wikidata": "Q6906313"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [0.1685664, 51.276735]
-			},
-			"id": "node/2278539088"
-		}, {
-			"type": "Feature",
-			"properties": {
-				"@id": "node/2280107561",
-				"name": "Gravel Hill",
-				"place": "suburb"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [-0.5489158, 51.6151514]
-			},
-			"id": "node/2280107561"
-		}, {
-			"type": "Feature",
-			"properties": {
-				"@id": "node/2280107563",
-				"name": "Chalfont Common",
-				"place": "suburb"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [-0.5511044, 51.6193616]
-			},
-			"id": "node/2280107563"
-		}, {
-			"type": "Feature",
-			"properties": {
 				"@id": "node/2288027626",
 				"name": "Belgravia",
 				"place": "suburb",
@@ -5642,7 +5383,7 @@
 			},
 			"geometry": {
 				"type": "Point",
-				"coordinates": [-0.12329578399658203, 51.51106619607]
+				"coordinates": [-0.12320995330810545, 51.51232149907683]
 			},
 			"id": "node/2290086954"
 		}, {
@@ -5828,19 +5569,6 @@
 		}, {
 			"type": "Feature",
 			"properties": {
-				"@id": "node/2905023039",
-				"name": "Bessels Green",
-				"place": "suburb",
-				"wikidata": "Q4896408"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [0.1588631, 51.2791964]
-			},
-			"id": "node/2905023039"
-		}, {
-			"type": "Feature",
-			"properties": {
 				"@id": "node/3064005585",
 				"name": "Globe Town",
 				"note": "Marker location in Meath Garden matches old OS map label. But is it really the \"true\" place to label as Globe Town?",
@@ -5970,21 +5698,6 @@
 				"coordinates": [0.2485771, 51.5587447]
 			},
 			"id": "node/3282529867"
-		}, {
-			"type": "Feature",
-			"properties": {
-				"@id": "node/3335927673",
-				"name": "Sheerwater",
-				"place": "suburb",
-				"source": "OS_OpenData_StreetView",
-				"wikidata": "Q7492513",
-				"wikipedia": "en:Sheerwater"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [-0.5276444, 51.3340438]
-			},
-			"id": "node/3335927673"
 		}, {
 			"type": "Feature",
 			"properties": {
@@ -6321,7 +6034,7 @@
 			},
 			"geometry": {
 				"type": "Point",
-				"coordinates": [-0.1311754, 51.5131628]
+				"coordinates": [-0.13286590576171875, 51.51306932272445]
 			},
 			"id": "node/3937580110"
 		}, {
@@ -6818,23 +6531,9 @@
 			},
 			"geometry": {
 				"type": "Point",
-				"coordinates": [0.0899332, 51.604627]
+				"coordinates": [0.09647369384765625, 51.60602417742818]
 			},
 			"id": "node/4511034829"
-		}, {
-			"type": "Feature",
-			"properties": {
-				"@id": "node/4511037892",
-				"name": "Ongar",
-				"place": "suburb",
-				"population": "6251",
-				"wikidata": "Q1913028"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [0.243223, 51.7017772]
-			},
-			"id": "node/4511037892"
 		}, {
 			"type": "Feature",
 			"properties": {
@@ -6925,18 +6624,6 @@
 				"coordinates": [-0.0444663, 51.4923517]
 			},
 			"id": "node/4743294792"
-		}, {
-			"type": "Feature",
-			"properties": {
-				"@id": "node/4790767687",
-				"name": "Southbury",
-				"place": "suburb"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [-0.0606578, 51.650849]
-			},
-			"id": "node/4790767687"
 		}, {
 			"type": "Feature",
 			"properties": {
@@ -7864,6 +7551,234 @@
 			"geometry": {
 				"type": "Point",
 				"coordinates": [-0.019268989562988278, 51.504014489537944]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "Bushy Park"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.3373146057128906, 51.412483864171726]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "Hatton"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.41769504547119135, 51.46571857060405]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "Stanwell"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.47790527343749994, 51.45384645548734]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "Harlington"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.43593406677246094, 51.48747609488592]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "Sipson"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.45584678649902344, 51.48907943293123]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "Heathrow Airport T1/2/3"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.4550743103027343, 51.47063764118985]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "Heathrow T5"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.4880332946777343, 51.47170693418584]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "Heathrow T4"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.4455041885375976, 51.45879354542008]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "St. Helier"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.17876386642456055, 51.38517367812408]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "Selhurst"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.0881052017211914, 51.391306502148296]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "Charing Cross"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.1244974136352539, 51.507059678517834]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "Kensington Gardens"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.18088817596435547, 51.506445314672646]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "Chase Cross"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [0.17998695373535156, 51.60357201363794]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "Abridge"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [0.11861801147460938, 51.65061977147669]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "Debden"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [0.08316993713378906, 51.647797216650844]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "Tadworth"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.23371696472167966, 51.28999635023678]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "Tattenham Corner"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.2362060546875, 51.306150195330034]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "Waltham Cross"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.03038406372070312, 51.68506207631767]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "Totteridge"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.19929885864257812, 51.63264295154874]
 			}
 		}
 	]
