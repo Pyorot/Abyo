@@ -1,26 +1,22 @@
-# Abyo/locate.js
-This module contains scripts that reverse-geocode locations in London (within M25) using Turf.js with the data stored in ./data/.
+# Abyo
+Work-in-progress notification bot (LondonPogoMap to public Discord channels) with abstract filters.
 
-## Functions
- - **g(lat, lng)** – An endpoint: returns `[postal district] [3-letter borough code] [name]`, where `[name]` is `@ [nearest station]` if a station is detected within 500m, else `~ [nearest suburb]`.
- - **gB(lat, lng)** – Finds exact borough (exact at boundaries).
- - **gP(lat, lng)** – Finds exact postal district (approximate at boundaries).
- - **gSt(lat, lng)** – Finds nearest station marker (within 500m; TFL Tube Map (except Trams) and National Rail).
- - **gSu(lat, lng)** – Finds nearest suburb marker (unbounded).
+## App files
+- **index.js** – Contains functions to load Agents and run the process once (TODO: process loop).
+- **fetch.js** – Wraps LondonPogoMap HTTP endpoint and error-handling.
+- **parse.js** – Provides Pokemon class, which parses a raw Pokemon (from the fetched data) into a workable object.
+- **agent.js** – Provides Agent class (see below), representing an abstract filter, responsible for filtering and sending.
+- **locate.js** – Module that converts co-ordinates into accurate location data using local data and algorithms.
+- **post.js** – Wraps Discord HTTP endpoint and error-handling and converts Pokemon into presentable notification.
 
-## Data
-Data comes from these sources.
-- **Postal Districts** – https://www.doogal.co.uk/PostcodeDistricts.php
-- **Boroughs** – https://data.gov.uk/dataset/local-authority-districts-december-2016-full-extent-boundaries-in-great-britain2
-- **Stations** – OpenStreetMap (modified)
-- **Suburbs** – OpenStreetMap (modified)
+## Improvements over previous versions of Pyobot
+* Location data computed locally from accurate, processed data rather than via HTTP from inaccurate, unprocessed third-party endpoint.
+* Abstract filters over concrete JSON filter parameters.
+* Logic to figure out when is soonest to poll for data, fetching each datum exactly once (TODO).
 
-I processed the data as follows (the format is GeoJson). I made up the borough codes myself.
-- **Postcodes.json** contains polygons all postal districts in the areas [London postal area], WD, HA, EN, IG, RM, DA, BR, CR,SM, KT, TW, UB.
-- **Boroughs.json** contains all local authority districts in the ceremonial counties Greater London, Buckinghamshire, Hertfordshire, Essex, Kent, Surrey, Berkshire.
-- **Stations.json** contains all rail stations (except tram) within the M25; some may be missing (let me know).
-- **Suburbs.json** contains place=suburb/town nodes from OSM, heavily modified by me to improve usefulness and accuracy.
-
-## Dependencies
-- **turf-inside** – Turf.js library to solve point-in-polygon via ray-casting.
-- **turf-distance** – Turf.js library to find spherical distance between two points via Haversine formula.
+## Agent?
+The idea is that each Agent object is instantiated from a script file, which provides a dictionary of channels that the Agent should send to (identifier: DiscordChannelID) and a filter function with argument Pokemon that returns a channel identifier from the dictionary for an accepted Pokemon and undefined for a rejected Pokemon. Each Agent posts each Pokemon to at most one channel, so should represent a natural filtering demand, like
+- picking a channel for each Unown letter;
+- picking a channel for each rare Dex entry;
+- posting to a single curated channel;
+- posting to a single channel for 100% IV.

@@ -1,14 +1,15 @@
 {
   "name": "abyo",
-  "version": "0.1",
-  "description": "Pyobot Notifier (Abstract-filter, Node.js)",
-  "main": "locate.js",
+  "version": "0.5",
+  "description": "Pyobot Notifier (Abstract-filter, Node.js, WIP)",
+  "main": "index.js",
   "scripts": {
     "test": "test.js"
   },
   "author": "Pyorot",
   "license": "ISC",
   "dependencies": {
+    "superagent": "3.8.1",
     "turf-distance": "3.0.12",
     "turf-inside": "3.0.12"
   }
