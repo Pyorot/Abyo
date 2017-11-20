@@ -1,6 +1,6 @@
 node_modules
 scrap
-key.json
+.env
 .vscode
 agents/*
 !agents/template.js

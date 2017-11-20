@@ -1,5 +1,4 @@
 const request = require('superagent')
-const key = require('./key.json')
 
 module.exports.tellHead = tellHead
 module.exports.tellBody = tellBody
@@ -44,7 +43,7 @@ function post(channel, pokemon) {       // constructs full notification, then se
                     + ','
                     + pokemon.center.lng
                     + '&zoom=15&size=400x400&sensor=false&key='
-                    + key.google
+                    + process.env.KEY_GOOGLE
     embed.footer = {}
 
     let now = Date.now()/1000                                           // calculate time remaining just before sending
@@ -64,7 +63,7 @@ function discord(channel, message) {    // Discord send-message wrapper
     return new Promise((resolve,reject) => {
         request
             .post(url)
-            .set('Authorization', 'Bot ' + key.bot)
+            .set('Authorization', 'Bot ' + process.env.KEY_BOT)
             .set('User-Agent', 'Abyo')
             .type('application/json')
             .send(JSON.stringify(message))

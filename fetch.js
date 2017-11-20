@@ -18,7 +18,11 @@ function fetch(inserted='', bounds='', pokemon='') {
             .set('authority', 'londonpogomap.com')
             .set('referer', 'https://londonpogomap.com/')
             .set('x-requested-with', 'XMLHttpRequest')
-            .then(data => {resolve(data.body)})
+            .then(data => {
+                data = data.body
+                console.log('LPM: Fetch', 'length='+data.pokemons.length, 'since='+data.meta.inserted, 'time='+data.meta.time)
+                resolve(data)}
+            )
             .catch(error => {
                 console.error(JSON.stringify(error.response,null,4))
                 console.error('ERROR LPM:', 'Failed to fetch', inserted, bounds)

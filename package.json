@@ -1,6 +1,6 @@
 {
   "name": "abyo",
-  "version": "0.5",
+  "version": "0.5.1",
   "description": "Pyobot Notifier (Abstract-filter, Node.js, WIP)",
   "main": "index.js",
   "scripts": {
@@ -9,6 +9,7 @@
   "author": "Pyorot",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "4.0.0",
     "superagent": "3.8.1",
     "turf-distance": "3.0.12",
     "turf-inside": "3.0.12"

@@ -1,4 +1,4 @@
-const locate = require('./locate.js')
+if (process.env.LOCATE == 'true') {const locate = require('./locate.js')}
 const post = require('./post.js')
 
 class Agent {
@@ -15,7 +15,7 @@ Agent.prototype.test = function(pokemon) {
     let destination = this.filter(pokemon)
     if (destination) {
         // compute Pokemon location with locate.js if not previously computed for different destination
-        if (!pokemon.location) {pokemon.location = locate.g(pokemon.center.lat, pokemon.center.lng)}
+        if (process.env.LOCATE == 'true' && !pokemon.location) {pokemon.location = locate.g(pokemon.center.lat, pokemon.center.lng)}
         // add [channel, pokemon] to send queue for selected channel
         let channel = this.channels[destination]
         if (channel) {
@@ -34,7 +34,11 @@ Agent.prototype.send = async function() {
         item.push(0)                                // item = [channel, pokemon, failed_attempts]
         let timeout = 1.2
         try {
-            await post.post(...item)
+            if (process.env.POST == 'true') {
+                await post.post(...item)                            // real posting mode
+            } else {
+                console.log('TEST agent:', item[0], item[1].sig)    // test posting mode
+            }
         } catch (err) {
             if (err == 'expired') {                 // exception: expired Pokemon
                 console.log('ERROR agent', this.name, ': tried to send expired', item[0], item[1].sig)
@@ -54,11 +58,3 @@ Agent.prototype.send = async function() {
 }
 
 module.exports = Agent
-
-
-/* TESTS
-b = JSON.parse('{"id":"129","name":"Magikarp","center":{"lat":51.42167132,"lng":0.163},"despawn":1520352863,"sig":"1520352863/51.42167132/0.163","cp":117,"attack":14,"defence":9,"stamina":4,"levelAlt":22,"level":22,"iv":27,"ivPercent":60,"move1":"Splash","move2":"Struggle","gender":"M","form":0,"letter":""}')
-const test = new Agent('test')
-test.channels[3]='123' // fake channel ID
-test.test(b)
-*/
