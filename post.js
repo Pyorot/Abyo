@@ -14,19 +14,22 @@ function tellHead(pokemon) {            // provides notification title (except t
          + letterText
          + ivText
          + levelText
-         + ' | '
+         + ' |\n'
          + pokemon.location
-         + ' | (until '
+         + ' |\n(until '
          + new Date(pokemon.despawn *1000).toTimeString().slice(0,8)
-         + ')'
+         + ') |'
     }
 
 function tellBody(pokemon) {            // provides notification body
     let cpText = (pokemon.cp >= 0)? ' ' + pokemon.cp + 'CP |' : ''
     let adsText = (pokemon.iv >= 0)? ' ' + pokemon.attack + '/' + pokemon.defence + '/' + pokemon.stamina + ' |' : ''
     let movesText = (pokemon.move1 && pokemon.move2)? ' ' + pokemon.move1 + '/' + pokemon.move2 + ' |' : ''
-    let genderText = pokemon.gender? ' ' + pokemon.gender : ''
-    return cpText + adsText + movesText + genderText
+    let genderText = pokemon.gender? ' ' + pokemon.gender + ' |': ''
+    return cpText
+         + adsText
+         + movesText
+         + genderText
 }
 
 function post(channel, pokemon) {       // constructs full notification, then sends message
@@ -35,8 +38,11 @@ function post(channel, pokemon) {       // constructs full notification, then se
             + ','
             + pokemon.center.lng
     let embed = {}
-    let content = tellHead(pokemon) + ' |\n' + url + ' |'
-    embed.description = tellBody(pokemon)
+    let content = tellHead(pokemon)
+                + '\n'
+                + tellBody(pokemon)
+                + '\n'
+                + url + ' |'
     embed.image = {}
     embed.image.url = 'https://maps.googleapis.com/maps/api/staticmap?markers='
                     + pokemon.center.lat
@@ -60,7 +66,9 @@ function post(channel, pokemon) {       // constructs full notification, then se
 
 function discord(channel, message) {    // Discord send-message wrapper
     let url = 'https://discordapp.com/api/channels/'+channel+'/messages'
-    let logTitle = message.content? message.content : message.content
+    let logTitle = message.content? message.content : message.embed.title
+        let newlineIndex = logtitle.indexOf("\n")
+        if (newlineIndex != -1) {logTitle = logtitle.slice(0,newlineIndex)}
     return new Promise((resolve,reject) => {
         request
             .post(url)
