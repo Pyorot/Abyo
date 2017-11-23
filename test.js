@@ -1,4 +1,5 @@
 // .load test.js in Node REPL, on top of whatever's being tested
+require('dotenv').load()
 
 _rP = {         // a non-expired raw Pokemon
     "pokemon_id": "129",

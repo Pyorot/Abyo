@@ -12,7 +12,7 @@ Work-in-progress notification bot (LondonPogoMap to public Discord channels) wit
 ## Improvements over previous versions of Pyobot
 * Location data computed locally from accurate, processed data rather than via HTTP from inaccurate, unprocessed third-party endpoint.
 * Abstract filters over concrete JSON filter parameters.
-* Logic to figure out when is soonest to poll for data, fetching each datum exactly once (TODO).
+* Logic to figure out when is soonest to poll for data, fetching each datum exactly once.
 
 ## Agent?
 The idea is that each Agent object is instantiated from a script file, which provides a dictionary of channels that the Agent should send to (identifier: DiscordChannelID) and a filter function with argument Pokemon that returns a channel identifier from the dictionary for an accepted Pokemon and undefined for a rejected Pokemon. Each Agent posts each Pokemon to at most one channel, so should represent a natural filtering demand, like

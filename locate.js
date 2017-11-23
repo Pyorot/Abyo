@@ -95,5 +95,5 @@ function g(lat, lng) {
     } else {
         name = "@ " + name
     }
-    return gP(lat, lng) + " " + boroughDict[gB(lat, lng)] + " " + name
+    return gP(lat, lng) + " " + name + ", " + boroughDict[gB(lat, lng)]
 }

@@ -30,13 +30,13 @@ function tellBody(pokemon) {            // provides notification body
 }
 
 function post(channel, pokemon) {       // constructs full notification, then sends message
+    let url = 'http://www.google.com/maps/place/'
+            + pokemon.center.lat
+            + ','
+            + pokemon.center.lng
     let embed = {}
-    embed.title = tellHead(pokemon)
+    let content = tellHead(pokemon) + ' |\n' + url + ' |'
     embed.description = tellBody(pokemon)
-    embed.url = 'http://www.google.com/maps/place/'
-              + pokemon.center.lat
-              + ','
-              + pokemon.center.lng
     embed.image = {}
     embed.image.url = 'https://maps.googleapis.com/maps/api/staticmap?markers='
                     + pokemon.center.lat
@@ -48,18 +48,19 @@ function post(channel, pokemon) {       // constructs full notification, then se
 
     let now = Date.now()/1000                                           // calculate time remaining just before sending
     if (pokemon.despawn <= now) {return Promise.reject('expired')}      // throw expired Pokemon exception
-    embed.title = embed.title.slice(0,-16)
-                + new Date((pokemon.despawn - now) *1000).toTimeString().slice(3,8)
-                + ' '
-                + embed.title.slice(-16)
+    let slicePoint = content.indexOf('(until')
+    content = content.slice(0,slicePoint)
+            + new Date((pokemon.despawn - now) *1000).toTimeString().slice(3,8)
+            + ' '
+            + content.slice(slicePoint)
     embed.footer.text = 'sent at ' + new Date(now *1000).toTimeString().slice(0,8)
 
-    return discord(channel, {embed: embed})
+    return discord(channel, {content: content, embed: embed})
 }
 
 function discord(channel, message) {    // Discord send-message wrapper
     let url = 'https://discordapp.com/api/channels/'+channel+'/messages'
-    let logTitle = message.content? message.content : message.embed.title
+    let logTitle = message.content? message.content : message.content
     return new Promise((resolve,reject) => {
         request
             .post(url)
