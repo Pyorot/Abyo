@@ -1,8 +1,8 @@
-const pokedex = require('./data/pokemon/pokedex.json')
-const moves = require('./data/pokemon/moves.json')
-const stats = require('./data/pokemon/stats.json')
-const cpms = require('./data/pokemon/cpms.json')
-const genders = {"-1":"", "1":"M", "2":"F", "3":"N"}
+var pokedex = require('./data/pokemon/pokedex.json')
+var moves = require('./data/pokemon/moves.json')
+var stats = require('./data/pokemon/stats.json')
+var cpms = require('./data/pokemon/cpms.json')
+var genders = {"-1":"", "1":"M", "2":"F", "3":"N"}
 
 module.exports = Pokemon
 

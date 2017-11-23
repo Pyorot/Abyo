@@ -1,9 +1,14 @@
 const fs = require('fs')
 const dotenv = require('dotenv'); dotenv.load() // loads env variables from .env into process.env
-const fetch = require('./fetch.js')
-const Pokemon = require('./parse.js')
-const Agent = require('./agent.js')
-const post = require('./post.js')
+
+// Load app components
+function init() {
+    fetch = require('./fetch.js')
+    Pokemon = require('./parse.js')
+    Agent = require('./agent.js')
+    post = require('./post.js')
+}
+init()
 
 // Load (build an agent for each script in ./agents/)
 agents = []; agentsDict = {}

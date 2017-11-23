@@ -1,5 +1,5 @@
-if (process.env.LOCATE == 'true') {const locate = require('./locate.js')}
-const post = require('./post.js')
+if (process.env.LOCATE == 'true') {var locate = require('./locate.js')}
+var post = require('./post.js')
 
 class Agent {
     constructor(filetitle) {
