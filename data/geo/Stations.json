@@ -4147,7 +4147,7 @@
 			},
 			"geometry": {
 				"type": "Point",
-				"coordinates": [-0.1781957, 51.5563942]
+				"coordinates": [-0.17826497554779053, 51.55665222661301]
 			},
 			"id": "node/70769747"
 		}, {
@@ -12023,6 +12023,42 @@
 			"geometry": {
 				"type": "Point",
 				"coordinates": [-0.013582706451416016, 51.53378983651458]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "Shoreditch High Street"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.07508039474487305, 51.52327054772943]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "King's Cross"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.12364983558654784, 51.53140051598135]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "Coulsdon South"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.1379084587097168, 51.31579417446189]
 			}
 		}
 	]

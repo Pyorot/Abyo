@@ -665,7 +665,7 @@
 			},
 			"geometry": {
 				"type": "Point",
-				"coordinates": [-0.0245145, 51.4310809]
+				"coordinates": [-0.02213358879089355, 51.431959179957204]
 			},
 			"id": "node/26472010"
 		}, {
@@ -5054,7 +5054,7 @@
 			},
 			"geometry": {
 				"type": "Point",
-				"coordinates": [-0.0387563, 51.3513283]
+				"coordinates": [-0.040726661682128906, 51.34991408954028]
 			},
 			"id": "node/2143331386"
 		}, {
@@ -6627,19 +6627,6 @@
 		}, {
 			"type": "Feature",
 			"properties": {
-				"@id": "node/5067675686",
-				"name": "South End",
-				"place": "suburb",
-				"wikidata": "Q15278751"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [-0.0131715, 51.4286029]
-			},
-			"id": "node/5067675686"
-		}, {
-			"type": "Feature",
-			"properties": {
 				"@id": "node/5067694335",
 				"name": "Perry Vale",
 				"place": "suburb",
@@ -7779,6 +7766,78 @@
 			"geometry": {
 				"type": "Point",
 				"coordinates": [-0.19929885864257812, 51.63264295154874]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "Beckenham Place Park"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.01308917999267578, 51.41863979052572]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "Bromley North"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [0.015149116516113281, 51.408736372684956]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "Addington"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.02626419067382812, 51.35787398295701]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "New Addington"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.013561248779296873, 51.34358807028324]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "Ashtead"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.3033256530761719, 51.30765258961638]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "Oxshott"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.3586006164550781, 51.33415102905873]
 			}
 		}
 	]
