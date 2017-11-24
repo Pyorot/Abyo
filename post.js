@@ -53,7 +53,7 @@ function post(channel, pokemon) {       // constructs full notification, then se
     embed.footer = {}
 
     let now = Date.now()/1000                                           // calculate time remaining just before sending
-    if (pokemon.despawn <= now) {return Promise.reject('expired')}      // throw expired Pokemon exception
+    if (pokemon.despawn - now <= 2*60) {return Promise.reject('expired')}      // throw expired Pokemon exception
     let slicePoint = content.indexOf('(until')
     content = content.slice(0,slicePoint)
             + new Date((pokemon.despawn - now) *1000).toTimeString().slice(3,8)
