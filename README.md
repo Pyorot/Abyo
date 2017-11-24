@@ -1,18 +1,18 @@
 # Abyo
-Work-in-progress notification bot (LondonPogoMap to public Discord channels) with abstract filters.
+Notification bot (LondonPogoMap to public Discord channels) with abstract filters.
 
 ## App files
-- **index.js** – Contains functions to load Agents and run the process once (TODO: process loop).
+- **index.js** – Contains functions to load Agents and run the process loop.
 - **fetch.js** – Wraps LondonPogoMap HTTP endpoint and error-handling.
 - **parse.js** – Provides Pokemon class, which parses a raw Pokemon (from the fetched data) into a workable object.
 - **agent.js** – Provides Agent class (see below), representing an abstract filter, responsible for filtering and sending.
 - **locate.js** – Module that converts co-ordinates into accurate location data using local data and algorithms.
-- **post.js** – Wraps Discord HTTP endpoint and error-handling and converts Pokemon into presentable notification.
+- **post.js** – Wraps Discord HTTP endpoint and error-handling and converts Pokemon into presentable notifications.
 
-## Improvements over previous versions of Pyobot
+## Improvements over previous versions of public Pyobot
 * Location data computed locally from accurate, processed data rather than via HTTP from inaccurate, unprocessed third-party endpoint.
 * Abstract filters over concrete JSON filter parameters.
-* Logic to figure out when is soonest to poll for data, fetching each datum exactly once.
+* Logic to figure out when is soonest to poll for data (continually adjusting its timing), fetching each datum exactly once.
 
 ## Agent?
 The idea is that each Agent object is instantiated from a script file, which provides a dictionary of channels that the Agent should send to (identifier: DiscordChannelID) and a filter function with argument Pokemon that returns a channel identifier from the dictionary for an accepted Pokemon and undefined for a rejected Pokemon. Each Agent posts each Pokemon to at most one channel, so should represent a natural filtering demand, like
@@ -20,3 +20,23 @@ The idea is that each Agent object is instantiated from a script file, which pro
 - picking a channel for each rare Dex entry;
 - posting to a single curated channel;
 - posting to a single channel for 100% IV.
+
+## To set up
+- .env contains configuration variables that are loaded when the app is started:
+    - `KEY_BOT` is the Discord bot token;
+    - `KEY_GOOGLE` is the Google Static Maps API key;
+    - `LOCATE = true`/`false` is a toggle for whether to load/use locate.js;
+    - `POST = true`/`false` toggles real/test posting mode (Discord/console rsp.).
+- ./agents/ contains a `.js` file for every agent (template is ignored).
+
+## To run (REPL mode)
+- open command line in the program directory and run Node.js REPL via the command `node` (no arguments).
+- run `.load index.js` to load program
+- `load()` (re)loads the Agents. If an Agent is sending when reloaded, it will continue to exist until it finishes.
+- `go()` starts the process loop (if started, it will continue the loop immediately).
+- `stop()` stops the process loop.
+**Testing**: `.load` can be used to test each code file individually and `.load test.js` imports test data).
+
+## Acknowledgements
+With thanks to [moriakaice](https://github.com/moriakaice/) from the  [PokémonGoLondon Discord](https://discord.gg/en6ea96) for implementing the original Node.js version of the notification bot ("Pyobot"), from which I learned some code techniques and tools, and got inspiration for improvements, and to the Discord community for providing ongoing feedback.
+    – Pyorot

@@ -38,9 +38,39 @@ _P = {          // Pokemon(_rP)
     move2: 'Struggle',
     gender: 'M',
     form: 0,
-    letter: ''
+    letter: '',
+    location: 'XX0 ~ SomeLongishPlaceName, YYY'
 }
-  
+
+_PLong = {          // Pokemon(_rP)
+    id: '129',
+    name: 'Charmander',
+    center: { lat: 51.42167132, lng: 0.16345678 },
+    despawn: 1520352863,
+    sig: '1520352863/51.42167132/0.16345678',
+    cp: 3000,
+    attack: 10,
+    defence: 10,
+    stamina: 10,
+    levelAlt: 30,
+    level: 30,
+    iv: 27,
+    ivPercent: 120,
+    move1: 'Zen Headbutt',
+    move2: 'Dragon Pulse',
+    gender: 'M',
+    form: 0,
+    letter: '',
+    location: 'SW00 ~ SomeLongishPlaceName, YYY'
+}
+
+var pys = {
+    "1": "293838131407486980",
+    "2": "296066428694429697",
+    "3": "296965358533869568",
+    "4": "296986176567640064"
+}
+
 async function _fetch(since, bounds, pokemon) {    // fetch and save raw to lpm.json
     let response
     try {

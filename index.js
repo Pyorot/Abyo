@@ -1,14 +1,9 @@
 const fs = require('fs')
 const dotenv = require('dotenv'); dotenv.load() // loads env variables from .env into process.env
-
-// Load app components
-function init() {
-    fetch = require('./fetch.js')
-    Pokemon = require('./parse.js')
-    Agent = require('./agent.js')
-    post = require('./post.js')
-}
-init()
+var fetch = require('./fetch.js')
+var Pokemon = require('./parse.js')
+var Agent = require('./agent.js')
+var post = require('./post.js')
 
 // Load (build an agent for each script in ./agents/)
 agents = []; agentsDict = {}
@@ -48,6 +43,8 @@ async function go() {
     stop()              // clean exit of previous iteration
     let now = Date.now()/1000; let nowString = String(Math.floor(now))
     console.log(nowString, 'Start.')
+
+    // fetch data
     let data
     try {
         data = await fetch(inserted)
@@ -56,6 +53,7 @@ async function go() {
         pending = setTimeout(go, 10*1000); return
     }
 
+    // calculate when to continue
     let newInserted = parseInt(data.meta.inserted)
     let Case =
         newInserted > inserted      ? 'new data'
@@ -65,10 +63,10 @@ async function go() {
     let delay = now - inserted
     let callAt =
         Case == 'new data'          ? inserted + 30 + Math.max(3, delay - 1)
-      :(Case == 'old data'          ? now + 2
-      :                               inserted + 30 + (delay < 33? 3 : delay))
+      :                               (delay < 33? inserted + 33 : now + 2)
     console.log(nowString, 'Fetched |', Case, '| delay='+String(delay.toFixed(2)), '| next='+String(callAt.toFixed(2)))
 
+    // resolve new data
     if (Case == 'new data') {
         let newCache = {}
         console.log(nowString, 'Resolving new data...')
@@ -90,6 +88,7 @@ async function go() {
         cache = newCache // replaces global variable "cache"
     }
 
+    // continue
     pending = setTimeout(go, (callAt - now)*1000)
 }
 

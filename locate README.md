@@ -2,7 +2,7 @@
 This module contains scripts that reverse-geocode locations in London (within M25) using Turf.js with the data stored in ./data/.
 
 ## Functions
- - **g(lat, lng)** – An endpoint: returns `[postal district] [3-letter borough code] [name]`, where `[name]` is `@ [nearest station]` if a station is detected within 500m, else `~ [nearest suburb]`.
+ - **g(lat, lng)** – An endpoint: returns `[postal district] [name], [3-letter borough code]`, where `[name]` is `@ [nearest station]` if a station is detected within 500m, else `~ [nearest suburb]`.
  - **gB(lat, lng)** – Finds exact borough (exact at boundaries).
  - **gP(lat, lng)** – Finds exact postal district (approximate at boundaries).
  - **gSt(lat, lng)** – Finds nearest station marker (within 500m; TFL Tube Map (except Trams) and National Rail).
@@ -15,7 +15,7 @@ Data comes from these sources.
 - **Stations** – OpenStreetMap (modified)
 - **Suburbs** – OpenStreetMap (modified)
 
-I processed the data as follows (the format is GeoJson). I made up the borough codes myself.
+I processed the data as follows (the format is GeoJSON). I made up the borough codes myself.
 - **Postcodes.json** contains polygons all postal districts in the areas [London postal area], WD, HA, EN, IG, RM, DA, BR, CR,SM, KT, TW, UB.
 - **Boroughs.json** contains all local authority districts in the ceremonial counties Greater London, Buckinghamshire, Hertfordshire, Essex, Kent, Surrey, Berkshire.
 - **Stations.json** contains all rail stations (except tram) within the M25; some may be missing (let me know).
