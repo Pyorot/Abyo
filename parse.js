@@ -39,7 +39,7 @@ function Pokemon(rawPokemon) {                          // the Pokemon class ret
     this.levelAlt = parseInt(rawPokemon.level)          // original (-1 if unknown) – buggy
     this.level = findLevel(this.id, this.cp, this.attack, this.defence, this.stamina)   // number (-1 if unknown)
     this.iv = this.attack + this.defence + this.stamina // number (-3 if unknown)
-    this.ivPercent = Math.floor((this.iv/45)*100)       // number (-7 if unknown)
+    this.ivPercent = Math.round((this.iv/45)*100)       // number (-7 if unknown)
     this.move1 = moves[rawPokemon.move1]                // text ("" if unknown)
     this.move2 = moves[rawPokemon.move2]                // text ("" if unknown)
     this.gender = genders[rawPokemon.gender]            // text ("" if unknown)
