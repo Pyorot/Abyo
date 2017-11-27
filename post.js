@@ -14,9 +14,9 @@ function tellHead(pokemon) {            // provides notification title (except t
          + letterText
          + ivText
          + levelText
-         + '\n'
+         + '\n| '
          + locationText
-         + '\n(until '
+         + '\n| (until '
          + new Date(pokemon.despawn *1000).toTimeString().slice(0,8)
          + ')'
     }
@@ -25,7 +25,7 @@ function tellBody(pokemon) {            // provides notification body
     let cpText = (pokemon.cp >= 0)? pokemon.cp + 'CP | ' : ''
     let adsText = (pokemon.iv >= 0)? pokemon.attack + '/' + pokemon.defence + '/' + pokemon.stamina + ' | ' : ''
     let movesText = (pokemon.move1 && pokemon.move2)? pokemon.move1 + '/' + pokemon.move2 + ' | ' : ''
-    let genderText = pokemon.gender? pokemon.gender + ' | ' : ''
+    let genderText = pokemon.gender? pokemon.gender : ''
     return cpText
          + adsText
          + movesText
@@ -39,9 +39,9 @@ function post(channel, pokemon) {       // constructs full notification, then se
             + pokemon.center.lng
     let embed = {}
     let content = tellHead(pokemon)
-                + '\n'
+                + '\n| '
                 + tellBody(pokemon)
-                + '\n'
+                + '\n| '
                 + url
     embed.image = {}
     embed.image.url = 'https://maps.googleapis.com/maps/api/staticmap?markers='

@@ -502,8 +502,7 @@
 			"type": "Feature",
 			"properties": {
 				"@id": "node/21434600",
-				"name": "Staines-upon-Thames",
-				"old_name": "Staines",
+				"name": "Staines",
 				"place": "town",
 				"source:name": "local knowledge",
 				"wikidata": "Q285323",
@@ -3957,7 +3956,7 @@
 				"@id": "node/701379193",
 				"is_in": "Kingston Upon Thames;London",
 				"is_in_postal": "Surrey",
-				"name": "Kingston upon Thames",
+				"name": "Kingston",
 				"place": "town",
 				"population": "43013",
 				"todo": "check - this is probably duplicate but I can't find a place node nearby",

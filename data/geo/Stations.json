@@ -4751,19 +4751,6 @@
 		}, {
 			"type": "Feature",
 			"properties": {
-				"@id": "node/937022268",
-				"historic": "monument",
-				"name": "Welling Station",
-				"railway": "station"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [0.1015989, 51.4647154]
-			},
-			"id": "node/937022268"
-		}, {
-			"type": "Feature",
-			"properties": {
 				"@id": "node/963506307",
 				"name": "Wembley Central",
 				"network": "London Overground;London Underground",
@@ -4864,8 +4851,11 @@
 		}, {
 			"type": "Feature",
 			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
 				"@id": "node/1264482797",
-				"name": "Paddington (District, Circle, and Bakerloo Lines)",
+				"name": "Paddington (Circle Line)",
 				"name:ru": "Паддингтон (линии Бейкерлу, Дистрикт и Кольцевая)",
 				"network": "London Underground",
 				"old_name": "Praed Street",
@@ -6246,8 +6236,11 @@
 		}, {
 			"type": "Feature",
 			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
 				"@id": "node/2314512860",
-				"name": "Edgware Road (Circle, District and Hammersmith & City)",
+				"name": "Edgware Road (Circle Line)",
 				"name:ru": "Эджвер-роуд",
 				"network": "London Underground",
 				"operator": "Transport for London",
@@ -6259,7 +6252,7 @@
 			},
 			"geometry": {
 				"type": "Point",
-				"coordinates": [-0.1665602, 51.5202552]
+				"coordinates": [-0.16653299331665036, 51.52021976638936]
 			},
 			"id": "node/2314512860"
 		}, {
@@ -6323,8 +6316,11 @@
 		}, {
 			"type": "Feature",
 			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
 				"@id": "node/2376594758",
-				"name": "Ongar Station",
+				"name": "Ongar",
 				"railway": "station",
 				"usage": "preserved_railway"
 			},
@@ -8068,27 +8064,9 @@
 			},
 			"geometry": {
 				"type": "Point",
-				"coordinates": [-0.1342549, 51.528808]
+				"coordinates": [-0.1339924335479736, 51.52844372506406]
 			},
 			"id": "node/3663368460"
-		}, {
-			"type": "Feature",
-			"properties": {
-				"@id": "node/3663368461",
-				"addr:postcode": "NW1 2DU",
-				"addr:street": "Eversholt Street",
-				"name": "Euston",
-				"network": "London Underground",
-				"operator": "Transport for London",
-				"platforms": 6,
-				"railway": "station",
-				"station": "subway"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [-0.1338745, 51.5282865]
-			},
-			"id": "node/3663368461"
 		}, {
 			"type": "Feature",
 			"properties": {
@@ -9127,8 +9105,11 @@
 		}, {
 			"type": "Feature",
 			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
 				"@id": "node/4635572117",
-				"name": "Paddington (Hammersmith and City Line)",
+				"name": "Paddington (H&C Line)",
 				"network": "London Underground",
 				"railway": "station",
 				"station": "subway",
@@ -10272,7 +10253,7 @@
 			},
 			"geometry": {
 				"type": "Point",
-				"coordinates": [-0.1702869, 51.5204644]
+				"coordinates": [-0.1700949668884277, 51.520333256444886]
 			},
 			"id": "node/5206774617"
 		}, {
@@ -10290,7 +10271,7 @@
 			},
 			"geometry": {
 				"type": "Point",
-				"coordinates": [-0.1635046, 51.5222363]
+				"coordinates": [-0.1631641387939453, 51.5223493267638]
 			},
 			"id": "node/5206785234"
 		}, {
@@ -12059,6 +12040,18 @@
 			"geometry": {
 				"type": "Point",
 				"coordinates": [-0.1379084587097168, 51.31579417446189]
+			}
+		}, {
+			"type": "Feature",
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "Paddington (Rail)"
+			},
+			"geometry": {
+				"type": "Point",
+				"coordinates": [-0.17745494842529297, 51.51703525365046]
 			}
 		}
 	]
