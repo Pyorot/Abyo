@@ -42,7 +42,7 @@ _P = {          // Pokemon(_rP)
     location: 'XX0 ~ SomeLongishPlaceName, YYY'
 }
 
-_PLong = {          // Pokemon(_rP)
+_PLong = {          // Pokemon with longest possible info
     id: '129',
     name: 'Charmander',
     center: { lat: 51.42167132, lng: 0.16345678 },
@@ -84,7 +84,7 @@ async function _fetch(since, bounds, pokemon) {    // fetch and save raw to lpm.
     }
 }
 
-async function _run() {    // read raw from lpm.json and run procedure
+function _run() {    // read raw from lpm.json and run procedure
     let now = String(Date.now())
     console.log(now, 'Start.')
     let data
@@ -98,7 +98,6 @@ async function _run() {    // read raw from lpm.json and run procedure
     })
     console.log(now, 'Resolved.')
 }
-
 
 /* agent.js
 const test = new Agent('test')

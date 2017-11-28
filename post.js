@@ -37,12 +37,12 @@ function post(channel, pokemon) {       // constructs full notification, then se
             + pokemon.center.lat
             + ','
             + pokemon.center.lng
-    let embed = {}
     let content = tellHead(pokemon)
                 + '\n| '
                 + tellBody(pokemon)
                 + '\n| '
                 + url
+    let embed = {}
     embed.image = {}
     embed.image.url = 'https://maps.googleapis.com/maps/api/staticmap?markers='
                     + pokemon.center.lat

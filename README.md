@@ -10,18 +10,19 @@ Notification bot (LondonPogoMap to public Discord channels) with abstract filter
 - **post.js** – Wraps Discord HTTP endpoint and error-handling and converts Pokemon into presentable notifications.
 
 ## Improvements over previous versions of public Pyobot
-* Location data computed locally from accurate, processed data rather than via HTTP from inaccurate, unprocessed third-party endpoint.
-* Abstract filters over concrete JSON filter parameters.
-* Logic to figure out when is soonest to poll for data (continually adjusting its timing), fetching each datum exactly once.
+* Location data computed locally from accurate, processed data rather than via HTTP from inaccurate, unprocessed third-party endpoint – faster, more scalable and gives better info.
+* Abstract filters over concrete JSON filter parameters – more flexibility to configure notification channels.
+* Logic to try to poll for data as soon as it's available (continually adjusting its timing) rather than in fixed intervals – much faster.
 
-## Agent?
-The idea is that each Agent object is instantiated from a script file, which provides a dictionary of channels that the Agent should send to (identifier: DiscordChannelID) and a filter function with argument Pokemon that returns a channel identifier from the dictionary for an accepted Pokemon and undefined for a rejected Pokemon. Each Agent posts each Pokemon to at most one channel, so should represent a natural filtering demand, like
+## Agents and abstract filters?
+The idea is that each Agent object is instantiated from a script file, which provides a dictionary of channels that the Agent should send to (with format `{identifier: DiscordChannelID}`) and a filter function with argument Pokemon that returns a channel identifier from the dictionary for an accepted Pokemon and undefined for a rejected Pokemon. Each Agent posts each Pokemon to at most one channel, so should represent a natural filtering demand, like (see examples in ./agents/):
 - picking a channel for each Unown letter;
 - picking a channel for each rare Dex entry;
 - posting to a single curated channel;
 - posting to a single channel for 100% IV.
 
 ## To set up
+- [authenticate your IP address with the Discord gateway](https://pastebin.com/NRh6Lb90).
 - .env contains configuration variables that are loaded when the app is started:
     - `KEY_BOT` is the Discord bot token;
     - `KEY_GOOGLE` is the Google Static Maps API key;
@@ -31,11 +32,16 @@ The idea is that each Agent object is instantiated from a script file, which pro
 
 ## To run (REPL mode)
 - open command line in the program directory and run Node.js REPL via the command `node` (no arguments).
-- run `.load index.js` to load program
+- run `.load index.js` to load program.
 - `load()` (re)loads the Agents. If an Agent is sending when reloaded, it will continue to exist until it finishes.
 - `go()` starts the process loop (if started, it will continue the loop immediately).
 - `stop()` stops the process loop.
 **Testing**: `.load` can be used to test each code file individually and `.load test.js` imports test data).
+
+## To run (non-REPL mode)
+*Use if problems in REPL mode with command line falling asleep or such.*
+- append `load(); go()` to index.js.
+- open command line in the program directory and run `node .`.
 
 ## Acknowledgements
 With thanks to [moriakaice](https://github.com/moriakaice/) from the  [PokémonGoLondon Discord](https://discord.gg/en6ea96) for implementing the original Node.js version of the notification bot ("Pyobot"), from which I learned some code techniques and tools, and got inspiration for improvements, and to the Discord community for providing ongoing feedback.
