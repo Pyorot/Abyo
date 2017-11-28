@@ -936,7 +936,7 @@
 			"type": "Feature",
 			"properties": {
 				"@id": "node/18038183",
-				"name": "Custom House for ExCel",
+				"name": "Custom House",
 				"network": "DLR",
 				"railway": "station",
 				"source_ref": "http://en.wikipedia.org/wiki/List_of_Docklands_Light_Railway_stations",
@@ -1543,7 +1543,7 @@
 			"type": "Feature",
 			"properties": {
 				"@id": "node/21095031",
-				"name": "Cutty Sark for Maritime Greenwich",
+				"name": "Cutty Sark",
 				"network": "DLR",
 				"operator": "Serco Docklands Light Railway",
 				"platforms": 2,
