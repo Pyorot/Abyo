@@ -4,3 +4,6 @@ scrap
 .vscode
 agents/*
 !agents/template.js
+!agents/lonnown.js
+!agents/pys-95-hr.js
+!agents/pys-larvtini.js
