@@ -11,8 +11,9 @@ Notification bot (LondonPogoMap to public Discord channels) with abstract filter
 
 ## Improvements over previous versions of public Pyobot
 * Location data computed locally from accurate, processed data rather than via HTTP from inaccurate, unprocessed third-party endpoint – faster, more scalable and gives better info.
-* Abstract filters over concrete JSON filter parameters – more flexibility to configure notification channels.
-* Logic to try to poll for data as soon as it's available (continually adjusting its timing) rather than in fixed intervals – much faster.
+* Abstract filters over concrete JSON filter parameters – much more flexibility to configure notification channels.
+* Logic to try to poll for data as soon as it's available (continually adjusting its timing) rather than in fixed intervals – noticeably faster.
+* Redesigned notification format: takes advantage of line breaks on iOS while giving detailed yet clearly delimited single-line alerts on Android.
 
 ## Agents and abstract filters?
 The idea is that each Agent object is instantiated from a script file, which provides a dictionary of channels that the Agent should send to (with format `{identifier: DiscordChannelID}`) and a filter function with argument Pokemon that returns a channel identifier from the dictionary for an accepted Pokemon and undefined for a rejected Pokemon. Each Agent posts each Pokemon to at most one channel, so should represent a natural filtering demand, like (see examples in ./agents/):
@@ -42,6 +43,9 @@ The idea is that each Agent object is instantiated from a script file, which pro
 *Use if problems in REPL mode with command line falling asleep or such.*
 - append `load(); go()` to index.js.
 - open command line in the program directory and run `node .`.
+
+## Tada!
+<img src="https://cdn.discordapp.com/attachments/293838131407486980/385244167627866112/image.png" width="468"/>
 
 ## Acknowledgements
 With thanks to [moriakaice](https://github.com/moriakaice/) from the  [PokémonGoLondon Discord](https://discord.gg/en6ea96) for implementing the original Node.js version of the notification bot ("Pyobot"), from which I learned some code techniques and tools, and got inspiration for improvements, and to the Discord community for providing ongoing feedback.
