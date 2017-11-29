@@ -37,7 +37,7 @@ The idea is that each Agent object is instantiated from a script file, which pro
 - `load()` (re)loads the Agents. If an Agent is sending when reloaded, it will continue to exist until it finishes.
 - `go()` starts the process loop (if started, it will continue the loop immediately).
 - `stop()` stops the process loop.
-**Testing**: `.load` can be used to test each code file individually and `.load test.js` imports test data).
+- **Testing**: `.load` can be used to test each code file individually and `.load test.js` imports test data).
 
 ## To run (non-REPL mode)
 *Use if problems in REPL mode with command line falling asleep or such.*
