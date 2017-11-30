@@ -4767,21 +4767,6 @@
 		}, {
 			"type": "Feature",
 			"properties": {
-				"@id": "node/1016122582",
-				"name": "Watford Miniature Railway",
-				"railway": "station",
-				"source": "Bing",
-				"tourism": "attraction",
-				"usage": "tourism"
-			},
-			"geometry": {
-				"type": "Point",
-				"coordinates": [-0.423798, 51.6622838]
-			},
-			"id": "node/1016122582"
-		}, {
-			"type": "Feature",
-			"properties": {
 				"@id": "node/1104903773",
 				"name": "Bushey",
 				"network": "London Overground;National Rail",
