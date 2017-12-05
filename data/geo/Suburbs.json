@@ -6902,14 +6902,24 @@
 			"id": "node/5186655480"
 		}, {
 			"type": "Feature",
-			"properties": {},
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "Acton Vale"
+			},
 			"geometry": {
 				"type": "Point",
 				"coordinates": [-0.24959564208984375, 51.50655216115383]
 			}
 		}, {
 			"type": "Feature",
-			"properties": {},
+			"properties": {
+				"marker-color": "#7e7e7e",
+				"marker-size": "medium",
+				"marker-symbol": "",
+				"name": "North Cheam"
+			},
 			"geometry": {
 				"type": "Point",
 				"coordinates": [-0.21552085876464844, 51.372316183248635]
