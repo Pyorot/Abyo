@@ -7,7 +7,7 @@ var stations = require('./data/geo/Stations.json').features      // OSM railway 
 var boroughDict = require('./data/geo/boroughDict.json')         // Three-letter codes for boroughs
 console.log("Loaded geographical data.") // ~ 13MB
 
-module.exports = {gB: gB, gBD: gBDm, gP: gP, gSt: gSt, gSu: gSu}
+module.exports = {gB: gB, gBD: gBD, gP: gP, gSt: gSt, gSu: gSu}
 
 function gP(point) {return geo.partition(point, postcodes)}
 function gB(point) {return geo.partition(point, boroughs)}
