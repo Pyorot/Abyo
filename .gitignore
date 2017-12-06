@@ -8,3 +8,4 @@ agents/*
 !agents/lonnown.js
 !agents/pys-95-hr.js
 !agents/pys-larvtini.js
+!agents/hammersmith.js
