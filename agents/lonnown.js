@@ -33,13 +33,11 @@ var channels = {
 
 function filter(pokemon) {
     if (pokemon.name == "Unown") {
+        let letter = pokemon.letter ? pokemon.letter : "unknown"
         if (pokemon.ivPercent == 100) {
-            return "100"
-        }
-        else if (pokemon.letter) {
-            return pokemon.letter
+            return ["100", letter]
         } else {
-            return "unknown"
+            return letter
         }
     }
 }

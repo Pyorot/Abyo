@@ -1,12 +1,13 @@
 # Abyo/locate.js
-This module contains scripts that reverse-geocode locations in London (within M25) using Turf.js with the data stored in ./data/.
+This module contains scripts that reverse-geocode locations in London (within M25) using Turf.js with the data stored in ./data/geo/. The pure geographical operations are located at ./geo.js.
 
 ## Functions
- - **g(lat, lng)** – An endpoint: returns `[postal district] [name], [3-letter borough code]`, where `[name]` is `@ [nearest station]` if a station is detected within 500m, else `~ [nearest suburb]`.
  - **gB(lat, lng)** – Finds exact borough (exact at boundaries).
+  - **gBD(lat, lng)** – The above, represented by 3-letter code.
  - **gP(lat, lng)** – Finds exact postal district (approximate at boundaries).
  - **gSt(lat, lng)** – Finds nearest station marker (within 500m; TFL Tube Map (except Trams) and National Rail).
  - **gSu(lat, lng)** – Finds nearest suburb marker (unbounded).
+  - ~~**g(lat, lng)**~~ – (*This has been moved to `annotate` in agent.js*.) An endpoint: returns `[postal district] [name], [3-letter borough code]`, where `[name]` is `@ [nearest station]` if a station is detected within 500m, else `~ [nearest suburb]`.
 
 ## Data
 Data comes from these sources.
@@ -20,6 +21,8 @@ I processed the data as follows (the format is GeoJSON). I made up the borough c
 - **Boroughs.json** contains all local authority districts in the ceremonial counties Greater London, Buckinghamshire, Hertfordshire, Essex, Kent, Surrey, Berkshire.
 - **Stations.json** contains all rail stations (except tram) within the M25; some may be missing (let me know).
 - **Suburbs.json** contains place=suburb/town nodes from OSM, heavily modified by me to improve usefulness and accuracy.
+
+The polygons in the polygon collections, Postcodes and Boroughs, have all been annotated with bounding boxes, at `Feature.properties.bbox` (computed using turf-bbox).
 
 ## Dependencies
 - **turf-inside** – Turf.js library to solve point-in-polygon via ray-casting.

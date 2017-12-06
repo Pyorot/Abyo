@@ -2,6 +2,7 @@ node_modules
 scrap
 .env
 .vscode
+data/geo/raw/
 agents/*
 !agents/template.js
 !agents/lonnown.js

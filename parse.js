@@ -1,3 +1,5 @@
+var locate = require('./locate.js')
+
 var pokedex = require('./data/pokemon/pokedex.json')
 var moves = require('./data/pokemon/moves.json')
 var stats = require('./data/pokemon/stats.json')
@@ -28,7 +30,7 @@ function findLevel(id, cp, attack, defence, stamina) {
 function Pokemon(rawPokemon) {                          // the Pokemon class returned by this module
     this.id = rawPokemon.pokemon_id
     this.name = pokedex[this.id]                        // text (always known)
-    this.center = {lat: parseFloat(rawPokemon.lat), lng: parseFloat(rawPokemon.lng)}
+    this.point = [parseFloat(rawPokemon.lat), parseFloat(rawPokemon.lng)]
     this.despawn = parseInt(rawPokemon.despawn)
     this.sig = rawPokemon.despawn + '/' + rawPokemon.lat + '/' + rawPokemon.lng         // unique spacetime ID
 
@@ -46,4 +48,7 @@ function Pokemon(rawPokemon) {                          // the Pokemon class ret
 
     this.form = parseInt(rawPokemon.form)               // original (0 if none, -1 if unknown)
     this.letter = (this.id == 201 && this.form >= 1 && this.form <= 26)? String.fromCharCode(this.form + 64) : "" // text ("" if none/unknown)
+
+    this.location = {postcode: locate.gP(this.point)}
+    this.annotated = false                              // every Pokemon is parsed; those that will be sent out are annotated
 }

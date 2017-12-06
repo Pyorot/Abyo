@@ -2,44 +2,44 @@
 require('dotenv').load()
 
 _rP = {         // a non-expired raw Pokemon
-    "pokemon_id": "129",
-    "lat": "51.42167132",
-    "lng": "0.163",
-    "despawn": "1520352863",
+    "pokemon_id": "193",
+    "lat": "51.64146084",
+    "lng": "-0.28978798",
+    "despawn": "1512513386",
     "disguise": "0",
-    "attack": "14",
-    "defence": "9",
-    "stamina": "4",
-    "move1": "231",
-    "move2": "133",
+    "attack": "-1",
+    "defence": "-1",
+    "stamina": "-1",
+    "move1": "-1",
+    "move2": "-1",
     "costume": "0",
-    "gender": "1",
+    "gender": "2",
     "shiny": "0",
     "form": "0",
-    "cp": "117",
-    "level": "22"
+    "cp": "-1",
+    "level": "-1"
 }
 
 _P = {          // Pokemon(_rP)
-    id: '129',
-    name: 'Magikarp',
-    center: { lat: 51.42167132, lng: 0.163 },
-    despawn: 1520352863,
-    sig: '1520352863/51.42167132/0.163',
-    cp: 117,
-    attack: 14,
-    defence: 9,
-    stamina: 4,
-    levelAlt: 22,
-    level: 22,
-    iv: 27,
-    ivPercent: 60,
-    move1: 'Splash',
-    move2: 'Struggle',
-    gender: 'M',
+    id: '193',
+    name: 'Yanma',
+    point: [ 51.64146084, -0.28978798 ],
+    despawn: 1512513386,
+    sig: '1512513386/51.64146084/-0.28978798',
+    cp: -1,
+    attack: -1,
+    defence: -1,
+    stamina: -1,
+    levelAlt: -1,
+    level: -1,
+    iv: -3,
+    ivPercent: -7,
+    move1: '',
+    move2: '',
+    gender: 'F',
     form: 0,
     letter: '',
-    location: 'XX0 ~ SomeLongishPlaceName, YYY'
+    annotated: false
 }
 
 _PLong = {          // Pokemon with longest possible info
