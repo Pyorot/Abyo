@@ -2,12 +2,13 @@
 This module contains scripts that reverse-geocode locations in London (within M25) using Turf.js with the data stored in ./data/geo/. The pure geographical operations are located at ./geo.js.
 
 ## Functions
- - **gB(lat, lng)** – Finds exact borough (exact at boundaries).
-  - **gBD(lat, lng)** – The above, represented by 3-letter code.
- - **gP(lat, lng)** – Finds exact postal district (approximate at boundaries).
- - **gSt(lat, lng)** – Finds nearest station marker (within 500m; TFL Tube Map (except Trams) and National Rail).
- - **gSu(lat, lng)** – Finds nearest suburb marker (unbounded).
-  - ~~**g(lat, lng)**~~ – (*This has been moved to `annotate` in agent.js*.) An endpoint: returns `[postal district] [name], [3-letter borough code]`, where `[name]` is `@ [nearest station]` if a station is detected within 500m, else `~ [nearest suburb]`.
+*Convention: point = [lat, lng].*
+ - **gB(point)** – Finds exact borough (exact at boundaries).
+  - **gBD(point)** – The above, represented by 3-letter code.
+ - **gP(point)** – Finds exact postal district (approximate at boundaries).
+ - **gSt(point)** – Finds nearest station marker (within 500m; TFL Tube Map (except Trams) and National Rail).
+ - **gSu(point)** – Finds nearest suburb marker (unbounded).
+  - ~~**g(point)**~~ – (*This has been moved to `annotate` in agent.js*.) An endpoint: returns `[postal district] [name], [3-letter borough code]`, where `[name]` is `@ [nearest station]` if a station is detected within 500m, else `~ [nearest suburb]`.
 
 ## Data
 Data comes from these sources.
