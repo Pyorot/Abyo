@@ -76,7 +76,10 @@ async function go() {
             if (!cache[sig]) {
                 let pokemon = new Pokemon(rawPokemon)
                 agents.forEach(agent => {
-                    agent.test(pokemon)
+                    try {agent.test(pokemon)} catch (error) {
+                        console.error(error)
+                        console.error("ERROR agent", agent.name, ": failed to process", sig)
+                    }
                 })
                 newCache[sig] = true
                 foundCounter++
