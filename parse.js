@@ -11,7 +11,6 @@ module.exports = Pokemon
 function findLevel(id, cp, attack, defence, stamina) {
     if (cp < 0) {return -1}
     let stat = stats[pokedex[id]];
-    if (!stat) {return -1}
     function getCp(level) {
         let cpm = cpms[level]
         return Math.max(10, Math.floor(0.1
@@ -22,7 +21,7 @@ function findLevel(id, cp, attack, defence, stamina) {
             * cpm
         ));
     }
-    for (level=1; level<=40; level++) {
+    for (level=1; level<=30; level++) {
         if (getCp(level) == cp) {return level}
     }
     return -1
