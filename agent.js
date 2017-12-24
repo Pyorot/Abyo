@@ -81,6 +81,9 @@ function tell(pokemon) {        // notification content
     let letterText = pokemon.letter? ' ' + pokemon.letter  : ''
     let ivText = (pokemon.iv >= 0)? ' ' + pokemon.ivPercent + '%' : ''
     let levelText = (pokemon.level >= 0)? ' L' + pokemon.level : ''
+    let weatherText = (!isNaN(pokemon.weather)) ? 
+        (pokemon.weather != 0 ? ' +' : ' –')
+        : ''
 
     let despawnText = new Date(pokemon.despawn *1000).toTimeString().slice(0,8)
 
@@ -91,7 +94,7 @@ function tell(pokemon) {        // notification content
 
     let url = 'http://www.google.com/maps/place/' + pokemon.point[0] + ',' + pokemon.point[1]
     
-    return pokemon.name + letterText + ivText + levelText
+    return pokemon.name + letterText + ivText + levelText + weatherText
          + '\n| ' + pokemon.locationText
          + '\n| #TIME (until ' + despawnText + ')'
          + '\n| ' + cpText + adsText + movesText + genderText

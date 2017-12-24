@@ -47,6 +47,8 @@ function Pokemon(rawPokemon) {                          // the Pokemon class ret
     this.move2 = moves[rawPokemon.move2]                // text ("" if unknown)
     this.gender = genders[rawPokemon.gender]            // text ("" if unknown)
 
+    this.weather = parseInt(rawPokemon.weather)
+
     this.form = parseInt(rawPokemon.form)               // original (0 if none, -1 if unknown)
     this.letter = (this.id == 201 && this.form >= 1 && this.form <= 26)? String.fromCharCode(this.form + 64) : "" // text ("" if none/unknown)
 
