@@ -29,16 +29,21 @@ async function run(since, bounds, pokemon) {
     data.pokemons.forEach(rawPokemon => {
         let pokemon = new Pokemon(rawPokemon)
         agents.forEach(agent => {
-            agent.test(pokemon)
+            try {agent.test(pokemon)} catch (error) {
+                console.error(error)
+                console.error("ERROR agent", agent.name, ": failed to process", sig)
+            }
         })
     })
     console.log(now, 'Resolved.')
 }
 
 // Run loop of process
-inserted = 2000000000   // a timecode representing when the data was updated
+inserted = 0            // a timecode representing when the data was updated
 cache = {}              // to deal with same data appearing in two consecutive fetches sometimes
 pending = undefined     // represents the pending loop iteration
+retryTime = 2
+oldFetches = 0
 async function go() {
     stop()              // clean exit of previous iteration
     let now = Date.now()/1000; let nowString = String(Math.floor(now))
@@ -56,20 +61,29 @@ async function go() {
     // calculate when to continue
     let newInserted = parseInt(data.meta.inserted)
     let Case =
-        newInserted > inserted      ? 'new data'
-      :(newInserted === inserted    ? 'old data'
-      :                               'first run')
-    inserted = newInserted
+        inserted == 0               ? 'first run'
+      :(newInserted > inserted      ? 'new data'
+      :                               'old data')
+    if (newInserted > inserted) {inserted = newInserted}
     let delay = now - inserted
     let callAt =
-        Case == 'new data'          ? inserted + 30 + Math.max(3, delay - 1)
-      :                               (delay < 33? inserted + 33 : now + 2)
+        Case == 'new data'          ? inserted + 30 + Math.max(2.5, delay - 1)
+                                    : (delay < 33 ? inserted + 33 : now + retryTime)
+    if (Case != 'new data') {
+        oldFetches++
+        if (oldFetches > 30) {
+            retryTime = 30
+        }
+    } else {
+        retryTime = 2
+        oldFetches = 0
+    }
     console.log(nowString, 'Fetched |', Case, '| delay='+String(delay.toFixed(2)), '| next='+String(callAt.toFixed(2)))
 
     // resolve new data
     if (Case == 'new data') {
         let newCache = {}
-        console.log(nowString, 'Resolving new data...')
+        console.log(nowString, 'Resolving new data...', 'agents='+String(agents.length))
         let foundCounter = 0; let cacheCounter = 0
         data.pokemons.forEach(rawPokemon => {
             let sig = rawPokemon.despawn + '/' + rawPokemon.lat + '/' + rawPokemon.lng
