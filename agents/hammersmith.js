@@ -11,9 +11,12 @@ function filter(pokemon) {
     }
 }
 
-area = {
+const area = {
     "type": "Feature",
-    "properties": {},
+    "properties": {
+        "name": "area-hammersmith",
+        "bbox": [-0.2463340759277344, 51.48114235839245, -0.1979684829711914, 51.5118674573013]
+    },
     "geometry": {
         "type": "Polygon",
         "coordinates": [
