@@ -29,7 +29,7 @@ function findLevel(id, cp, attack, defence, stamina) {
 }
 
 function Pokemon(rawPokemon) {                          // the Pokemon class returned by this module
-    this.id = rawPokemon.pokemon_id
+    this.id = parseInt(rawPokemon.pokemon_id)
     this.name = pokedex[this.id]                        // text (always known)
     this.point = [parseFloat(rawPokemon.lat), parseFloat(rawPokemon.lng)]
     this.despawn = parseInt(rawPokemon.despawn)

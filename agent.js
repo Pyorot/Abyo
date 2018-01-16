@@ -12,8 +12,8 @@ class Agent {
     }
 }
 Agent.prototype.test = function(pokemon) {
-    let destinations = this.filter(pokemon)
-    if (destinations) {
+    let destinations = this.filter(pokemon)     // a string or list of strings or undefined
+    if (destinations && destinations.length) {
         if (!pokemon.annotated) {annotate(pokemon)}
         // add [channel, pokemon] to send queue for selected channels
         if (typeof destinations == 'string') {destinations = [destinations]}
@@ -39,12 +39,13 @@ Agent.prototype.send = async function() {
             if (process.env.POST == 'true') {
                 await post.post(...item)                            // real posting mode
             } else {
-                console.log('TEST agent:', item[0], item[1].sig)    // test posting mode
+                console.log('TEST agent', this.name, ':', item[0], item[1].sig)    // test posting mode
             }
         } catch (err) {
             if (err == 'expired') {                 // exception: expired Pokemon
                 console.log('ERROR agent', this.name, ': tried to send expired', item[0], item[1].sig)
             } else {                                // exception: Discord POST request failed
+                if (err == 'timeout') {console.error('ERROR agent:', 'Send timeout:', item[0], item[1].sig)}
                 item[2]++
                 if (item[2] < 3) {                  // retry send
                     console.log('ERROR agent', this.name, ': failed to send, attempt', item[2])

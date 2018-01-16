@@ -34,6 +34,8 @@ function inside(point, polygon) {
         )) {
             return false
         }
+    } else {
+        console.error('GEO Warning:', polygon.properties.name, 'has no bbox.')
     }
     // point-in-polygon test
     return turfInside(flip(point), polygon)

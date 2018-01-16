@@ -26,14 +26,19 @@ function post(channel, pokemon) {       // constructs full notification, then se
 
 function discord(channel, message) {    // Discord send-message wrapper
     return new Promise((resolve,reject) => {
+        let logTitle = message.content.slice(0,30).replace(/\n/g," ")
         request
             .post('https://discordapp.com/api/channels/'+channel+'/messages')
+            .timeout({
+                response: 5*1000,  // to start receiving
+                deadline: 10*1000, // to finish receiving
+            })
             .set('Authorization', 'Bot ' + process.env.KEY_BOT)
             .set('User-Agent', 'Abyo')
             .type('application/json')
             .send(JSON.stringify(message))
             .then(() => {
-                console.log('Sent', channel, message.content.slice(0,30).replace(/\n/g," "))
+                console.log('Sent', channel, logTitle)
                 resolve()
             })
             .catch(error => {
@@ -43,5 +48,6 @@ function discord(channel, message) {    // Discord send-message wrapper
                 console.error('    > discord message:', JSON.parse(error.response.text).message)
                 reject(error)
             })
+        setTimeout(() => reject('timeout'), 10*1000)
     })
 }
