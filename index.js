@@ -4,6 +4,13 @@ var fetch = require('./fetch.js')
 var Pokemon = require('./parse.js')
 var Agent = require('./agent.js')
 var post = require('./post.js')
+var error = require('./error.js')
+
+// Date methods
+Date.prototype.short = function() {return this.toTimeString().slice(0,8)}
+Date.prototype.long = function() {return this.toTimeString().slice(0,8) + '.' + this.getMilliseconds()}
+Date.prototype.number = function() {return this.getTime()/1000}
+Number.prototype.date = function() {return new Date(this*1000)}
 
 // Load (build an agent for each script in ./agents/)
 agents = []; agentsDict = {}
@@ -30,8 +37,8 @@ async function run(since, bounds, pokemon) {
         let pokemon = new Pokemon(rawPokemon)
         agents.forEach(agent => {
             try {agent.test(pokemon)} catch (error) {
-                console.error(error)
-                console.error("ERROR agent", agent.name, ": failed to process", sig)
+                error(error)
+                error("x ERROR agent", agent.name, ": failed to process", sig)
             }
         })
     })
@@ -42,19 +49,27 @@ async function run(since, bounds, pokemon) {
 inserted = 0            // a timecode representing when the data was updated
 cache = {}              // to deal with same data appearing in two consecutive fetches sometimes
 pending = undefined     // represents the pending loop iteration
-retryTime = 2
-oldFetches = 0
+oldFetches = 0; retryTime = 2
 async function go() {
     stop()              // clean exit of previous iteration
-    let now = Date.now()/1000; let nowString = String(Math.floor(now))
-    console.log(nowString, 'Start.')
+    let startTime = new Date(); let now = startTime.number()
+    let sendingString = ''
+    for (agent of agents) {
+        if (agent.sending) {sendingString += agent.name + ', '} else
+        if (agent.sendQueue.length != 0) {sendingString += agent.name + '*, '}
+    }
+    if (!sendingString) {sendingString = '[clear]'}
+    console.log('\n# Start |', startTime.short(),
+                '| from', inserted.date().short(),
+                '| agents', agents.length,
+                '| sending:', sendingString)
 
     // fetch data
     let data
     try {
         data = await fetch(inserted)
     } catch (error) {
-        console.log(nowString, 'Failed to fetch; retrying in 10s...')
+        console.log('x ERROR index: failed to fetch; retrying in 10s.')
         pending = setTimeout(go, 10*1000); return
     }
 
@@ -65,34 +80,33 @@ async function go() {
       :(newInserted > inserted      ? 'new data'
       :                               'old data')
     if (newInserted > inserted) {inserted = newInserted}
-    let delay = now - inserted
+    let delay = startTime.number() - inserted
     let callAt =
         Case == 'new data'          ? inserted + 30 + Math.max(2.5, delay - 1)
                                     : (delay < 33 ? inserted + 33 : now + retryTime)
     if (Case != 'new data') {
-        oldFetches++
-        if (oldFetches > 30) {
-            retryTime = 30
-        }
+        oldFetches++; if (oldFetches > 30) {retryTime = 30}
     } else {
-        retryTime = 2
-        oldFetches = 0
+        oldFetches = 0; retryTime = 2
     }
-    console.log(nowString, 'Fetched |', Case, '| delay='+String(delay.toFixed(2)), '| next='+String(callAt.toFixed(2)))
+    console.log('- Fetched |', Case,
+                '| to', newInserted.date().short(),
+                '| delay', delay.toFixed(3),
+                '| length', data.pokemons.length,
+                '| next', callAt.date().long())
 
     // resolve new data
     if (Case == 'new data') {
-        let newCache = {}
-        console.log(nowString, 'Resolving new data...', 'agents='+String(agents.length))
-        let foundCounter = 0; let cacheCounter = 0
+        let processStartTime = new Date()
+        let newCache = {}; let foundCounter = 0; let cacheCounter = 0
         data.pokemons.forEach(rawPokemon => {
             let sig = rawPokemon.despawn + '/' + rawPokemon.lat + '/' + rawPokemon.lng
             if (!cache[sig]) {
                 let pokemon = new Pokemon(rawPokemon)
                 agents.forEach(agent => {
                     try {agent.test(pokemon)} catch (error) {
-                        console.error(error)
-                        console.error("ERROR agent", agent.name, ": failed to process", sig)
+                        error(error)
+                        error("x ERROR agent", agent.name, ": failed to process", sig)
                     }
                 })
                 newCache[sig] = true
@@ -101,8 +115,11 @@ async function go() {
                 cacheCounter++
             }
         })
-        console.log(nowString, 'Resolved;', "found="+String(foundCounter), "; cached="+String(cacheCounter))
         cache = newCache // replaces global variable "cache"
+        let processEndTime = new Date()
+        console.log('- Resolved',
+                    '| found', foundCounter,
+                    '| took', (processEndTime.number() - processStartTime.number()).toFixed(3))
     }
 
     // continue
@@ -111,3 +128,6 @@ async function go() {
 
 // Stop process loop
 function stop() {clearTimeout(pending)}
+
+// Live usage
+// load(); go()

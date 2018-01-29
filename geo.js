@@ -2,6 +2,7 @@
 // endpoints: point = [lat,lng]; polygon as per GeoJSON; distance in km
 // GeoJSON/Turf.js: point = [lng,lat]; bbox = [minX,minY,maxX,maxY]
 
+var error = require('./error.js')
 const turfInside = require("turf-inside")       // Point in polygon
 const turfDistance = require("turf-distance")   // Geodesic distance
 
@@ -35,7 +36,7 @@ function inside(point, polygon) {
             return false
         }
     } else {
-        console.error('GEO Warning:', polygon.properties.name, 'has no bbox.')
+        error('x WARNING geo:', polygon.properties.name, 'has no bbox.')
     }
     // point-in-polygon test
     return turfInside(flip(point), polygon)

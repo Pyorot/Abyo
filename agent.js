@@ -1,5 +1,6 @@
 if (process.env.LOCATE == 'true') {var locate = require('./locate.js')}
 var post = require('./post.js')
+var error = require('./error.js')
 
 class Agent {
     constructor(filetitle) {
@@ -20,9 +21,9 @@ Agent.prototype.test = function(pokemon) {
         for (destination of destinations) {
             let channel = this.channels[destination]
             if (channel) {
-                this.sendQueue.push([channel, pokemon])
+                this.sendQueue.push([pokemon, channel, destination])
             } else {
-                console.error('ERROR agent', this.name, ': no channel registered as:', destination)
+                error('x ERROR agent', this.name, ': no channel registered as:', destination)
             }
         }
         // signal that sending should be happening
@@ -33,26 +34,26 @@ Agent.prototype.send = async function() {
     this.sending = Boolean(this.sendQueue.length)   // signify sending iff queue is non-empty
     if (this.sending) {
         let item = this.sendQueue.pop()
-        item.push(0)                                // item = [channel, pokemon, failed_attempts]
+        item.push(0)                                // item = [pokemon, channel, destination, failed_attempts]
         let timeout = 1.2
         try {
-            if (process.env.POST == 'true') {
-                await post.post(...item)                            // real posting mode
-            } else {
-                console.log('TEST agent', this.name, ':', item[0], item[1].sig)    // test posting mode
+            if (process.env.POST == 'true') {       // real posting mode
+                await post.post(...item)
+                console.log('> Sent >', this.name, item[2], '>', item[0].head)
+            } else {                                // test posting mode
+                console.log('> Test >', this.name, item[1], item[2], '>', item[0].head)
             }
-        } catch (err) {
-            if (err == 'expired') {                 // exception: expired Pokemon
-                console.log('ERROR agent', this.name, ': tried to send expired', item[0], item[1].sig)
-            } else {                                // exception: Discord POST request failed
-                if (err == 'timeout') {console.error('ERROR agent:', 'Send timeout:', item[0], item[1].sig)}
-                item[2]++
-                if (item[2] < 3) {                  // retry send
-                    console.log('ERROR agent', this.name, ': failed to send, attempt', item[2])
+        } catch (err) {                             // err = 'expired', 'timeout', 'http'
+            let postInfo = this.name + '>' + item[2] + '>' + item[0].head
+            error('x ERROR agent:', err, ':', postInfo)
+            if (err != 'expired') {
+                item[3]++
+                if (item[3] < 3) {                  // retry send
+                    error('.       agent: retrying send in 5s, attempt', item[3]+1, ':', postInfo)
                     timeout = 5
                     this.sendQueue.push(item)
                 } else {                            // abort send
-                    console.log('ERROR agent', this.name, ': failed to deliver', item[0], item[1].sig)
+                    error('x ERROR agent: delivery failed, aborted :', postInfo)
                 }
             }
         }
@@ -75,6 +76,7 @@ function annotate(pokemon) {        // post-process any Pokemon that will be sen
         pokemon.locationText = "#LOCATION"
     }
     pokemon.text = tell(pokemon)
+    pokemon.head = pokemon.text.slice(0,40).replace(/\n/g," ")
     pokemon.annotated = true
 }
 

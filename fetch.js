@@ -1,4 +1,5 @@
 const request = require('superagent')
+var error = require('./error.js')
 
 module.exports = fetch
 
@@ -18,14 +19,10 @@ function fetch(inserted='', bounds='', pokemon='') {
             .set('authority', 'londonpogomap.com')
             .set('referer', 'https://londonpogomap.com/')
             .set('x-requested-with', 'XMLHttpRequest')
-            .then(data => {
-                data = data.body
-                console.log('LPM:', 'Fetch', 'since='+data.meta.inserted, 'time='+data.meta.time, 'length='+data.pokemons.length)
-                resolve(data)
-            })
+            .then(data => resolve(data.body))
             .catch(error => {
-                console.error(JSON.stringify(error.response,null,4))
-                console.error('ERROR LPM:', 'Failed to fetch', inserted, bounds)
+                error(JSON.stringify(error.response,null,4))
+                error('x ERROR LPM:', 'failed to fetch', inserted, bounds)
                 reject('LPM')
             })
     })

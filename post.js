@@ -1,9 +1,10 @@
 const request = require('superagent')
+const error = require('./error.js')
 
 module.exports.post = post
 module.exports.discord = discord
 
-function post(channel, pokemon) {       // constructs full notification, then sends message
+function post(pokemon, channel) {       // constructs full notification, then sends message
     let embed = {
         image: {
             url: 'https://maps.googleapis.com/maps/api/staticmap?markers='
@@ -26,28 +27,27 @@ function post(channel, pokemon) {       // constructs full notification, then se
 
 function discord(channel, message) {    // Discord send-message wrapper
     return new Promise((resolve,reject) => {
-        let logTitle = message.content.slice(0,30).replace(/\n/g," ")
         request
             .post('https://discordapp.com/api/channels/'+channel+'/messages')
             .timeout({
-                response: 5*1000,  // to start receiving
-                deadline: 10*1000, // to finish receiving
+                response: 5*1000,       // to start receiving
+                deadline: 10*1000,      // to finish receiving
             })
             .set('Authorization', 'Bot ' + process.env.KEY_BOT)
             .set('User-Agent', 'Abyo')
             .type('application/json')
             .send(JSON.stringify(message))
-            .then(() => {
-                console.log('Sent', channel, logTitle)
-                resolve()
-            })
+            .then(resolve)
             .catch(error => {
-                console.error('ERROR Discord:', 'Failed to send:', channel, logTitle)
-                console.error('    > status:', error.response.status)
-                console.error('    > discord code:', JSON.parse(error.response.text).code)
-                console.error('    > discord message:', JSON.parse(error.response.text).message)
-                reject(error)
+                if (error.response) {   // for HTTP errors (rather than manual rejections)
+                    let logTitle = message.content.slice(0,30).replace(/\n/g," ")
+                    error('x ERROR Discord:', '(http) failed to post:', channel, logTitle,
+                                '\n      - status:', error.response.status,
+                                '\n      - discord code:', JSON.parse(error.response.text).code,
+                                '\n      - discord message:', JSON.parse(error.response.text).message)
+                }
+                reject('http')
             })
-        setTimeout(() => reject('timeout'), 10*1000)
+        setTimeout(() => reject('timeout'), 10*1000)    // manual rejection after 10s (to prevent hanging awaiting reply)
     })
 }
