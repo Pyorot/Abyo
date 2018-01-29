@@ -20,8 +20,8 @@ function fetch(inserted='', bounds='', pokemon='') {
             .set('referer', 'https://londonpogomap.com/')
             .set('x-requested-with', 'XMLHttpRequest')
             .then(data => resolve(data.body))
-            .catch(error => {
-                error(JSON.stringify(error.response,null,4))
+            .catch(err => {
+                error(JSON.stringify(err.response, null, 4))
                 error('x ERROR LPM:', 'failed to fetch', inserted, bounds)
                 reject('LPM')
             })

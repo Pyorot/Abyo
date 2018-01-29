@@ -7,7 +7,7 @@ bbox = require('turf-bbox') // external dependency
 filename = process.argv[2] ? process.argv[2] : "area.geojson"
 nametag = process.argv[3]
 
-try {input = JSON.parse(fs.readFileSync(filename))} catch (error) {console.error("Input file not found."); return}
+try {input = JSON.parse(fs.readFileSync(filename))} catch (err) {console.error("Input file not found."); return}
 if (nametag) {input.properties.name = nametag}
 input.properties.bbox = bbox(input)
 

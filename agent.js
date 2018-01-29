@@ -44,7 +44,7 @@ Agent.prototype.send = async function() {
                 console.log('> Test >', this.name, item[1], item[2], '>', item[0].head)
             }
         } catch (err) {                             // err = 'expired', 'timeout', 'http'
-            let postInfo = this.name + '>' + item[2] + '>' + item[0].head
+            let postInfo = this.name + ' > ' + item[2] + ' > ' + item[0].head
             error('x ERROR agent:', err, ':', postInfo)
             if (err != 'expired') {
                 item[3]++

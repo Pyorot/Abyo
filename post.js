@@ -38,13 +38,13 @@ function discord(channel, message) {    // Discord send-message wrapper
             .type('application/json')
             .send(JSON.stringify(message))
             .then(resolve)
-            .catch(error => {
-                if (error.response) {   // for HTTP errors (rather than manual rejections)
+            .catch(err => {
+                if (err.response) {   // for HTTP errors (rather than manual rejections)
                     let logTitle = message.content.slice(0,30).replace(/\n/g," ")
                     error('x ERROR Discord:', '(http) failed to post:', channel, logTitle,
-                                '\n      - status:', error.response.status,
-                                '\n      - discord code:', JSON.parse(error.response.text).code,
-                                '\n      - discord message:', JSON.parse(error.response.text).message)
+                                '\n      - status:', err.response.status,
+                                '\n      - discord code:', JSON.parse(err.response.text).code,
+                                '\n      - discord message:', JSON.parse(err.response.text).message)
                 }
                 reject('http')
             })

@@ -23,7 +23,7 @@ _rP = {         // a non-expired raw Pokemon
 _P = {          // Pokemon(_rP)
     id: '193',
     name: 'Yanma',
-    point: [ 51.64146084, -0.28978798 ],
+    point: [ 51.475071, -0.279798 ],
     despawn: 1512513386,
     sig: '1512513386/51.64146084/-0.28978798',
     cp: -1,
@@ -33,7 +33,7 @@ _P = {          // Pokemon(_rP)
     levelAlt: -1,
     level: -1,
     iv: -3,
-    ivPercent: -7,
+    ivPercent: 93,
     move1: '',
     move2: '',
     gender: 'F',
@@ -88,7 +88,7 @@ function _run() {    // read raw from lpm.json and run procedure
     let now = String(Date.now())
     console.log(now, 'Start.')
     let data
-    try {data = JSON.parse(fs.readFileSync('./scrap/lpm.json'))} catch (error) {console.error(error); return}
+    try {data = JSON.parse(fs.readFileSync('./scrap/lpm.json'))} catch (err) {console.error(err); return}
     console.log(now, 'Read', 'length='+data.pokemons.length, 'since='+data.meta.inserted, 'time='+data.meta.time)
     data.pokemons.forEach(rawPokemon => {
         let pokemon = new Pokemon(rawPokemon)
