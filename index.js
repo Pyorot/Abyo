@@ -5,12 +5,7 @@ var Pokemon = require('./parse.js')
 var Agent = require('./agent.js')
 var post = require('./post.js')
 var error = require('./error.js')
-
-// Date methods
-Date.prototype.short = function() {return this.toTimeString().slice(0,8)}
-Date.prototype.long = function() {return this.toTimeString().slice(0,8) + '.' + this.getMilliseconds()}
-Date.prototype.number = function() {return this.getTime()/1000}
-Number.prototype.date = function() {return new Date(this*1000)}
+require('./date.js')
 
 // Load (build an agent for each script in ./agents/)
 agents = []; agentsDict = {}
@@ -28,7 +23,7 @@ function load() {
 
 // Run one instance of process = fetch > parse > filter + send
 async function run(since, bounds, pokemon) {
-    let now = String(Math.floor(Date.now()/1000))
+    let startTime = new Date(); let now = startTime.number()
     console.log(now, 'Start.')
     let data
     try {data = await fetch(since,bounds,pokemon)} catch (error) {return}
@@ -59,22 +54,24 @@ async function go() {
         if (agent.sendQueue.length != 0) {sendingString += agent.name + '*, '}
     }
     if (!sendingString) {sendingString = '[clear]'}
-    console.log('\n# Start |', startTime.short(),
-                '| from', inserted.date().short(),
+    console.log('\n# Start |', startTime.hhmmss(),
+                '| from', inserted.date().hhmmss(),
                 '| agents', agents.length,
                 '| sending:', sendingString)
 
     // fetch data
-    let data
+    let data; let newInserted; let spawns; let length
     try {
         data = await fetch(inserted)
+        newInserted = parseInt(data.meta.inserted)
+        spawns = data.pokemons
+        length = spawns.length
     } catch (error) {
         console.log('x ERROR index: failed to fetch; retrying in 10s.')
         pending = setTimeout(go, 10*1000); return
     }
 
     // calculate when to continue
-    let newInserted = parseInt(data.meta.inserted)
     let Case =
         inserted == 0               ? 'first run'
       :(newInserted > inserted      ? 'new data'
@@ -90,16 +87,16 @@ async function go() {
         oldFetches = 0; retryTime = 2
     }
     console.log('- Fetched |', Case,
-                '| to', newInserted.date().short(),
+                '| to', newInserted.date().hhmmss(),
                 '| delay', delay.toFixed(3),
-                '| length', data.pokemons.length,
-                '| next', callAt.date().long())
+                '| length', length,
+                '| next', callAt.date().hhmmssmmm())
 
     // resolve new data
     if (Case == 'new data') {
         let processStartTime = new Date()
         let newCache = {}; let foundCounter = 0; let cacheCounter = 0
-        data.pokemons.forEach(rawPokemon => {
+        spawns.forEach(rawPokemon => {
             let sig = rawPokemon.despawn + '/' + rawPokemon.lat + '/' + rawPokemon.lng
             if (!cache[sig]) {
                 let pokemon = new Pokemon(rawPokemon)

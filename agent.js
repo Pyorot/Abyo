@@ -1,6 +1,7 @@
 if (process.env.LOCATE == 'true') {var locate = require('./locate.js')}
 var post = require('./post.js')
 var error = require('./error.js')
+require('./date.js')
 
 class Agent {
     constructor(filetitle) {
@@ -36,25 +37,27 @@ Agent.prototype.send = async function() {
         let item = this.sendQueue.pop()
         item.push(0)                                // item = [pokemon, channel, destination, failed_attempts]
         let timeout = 1.2
+        let postInfo = this.name + ' > ' + item[2] + ' > ' + item[0].head
         try {
             if (process.env.POST == 'true') {       // real posting mode
                 await post.post(...item)
-                console.log('> Sent >', this.name, item[2], '>', item[0].head)
             } else {                                // test posting mode
-                console.log('> Test >', this.name, item[1], item[2], '>', item[0].head)
+                postInfo = '[test] ' + postInfo
             }
+            console.log('> Sent >', new Date().ss(), '>', postInfo)
         } catch (err) {                             // err = 'expired', 'timeout', 'http'
-            let postInfo = this.name + ' > ' + item[2] + ' > ' + item[0].head
-            error('x ERROR agent:', err, ':', postInfo)
             if (err != 'expired') {
+                error('x ERROR agent:', err, ':', postInfo)
                 item[3]++
                 if (item[3] < 3) {                  // retry send
                     error('.       agent: retrying send in 5s, attempt', item[3]+1, ':', postInfo)
                     timeout = 5
                     this.sendQueue.push(item)
                 } else {                            // abort send
-                    error('x ERROR agent: delivery failed, aborted :', postInfo)
+                    console.log('x ERROR agent: delivery failed, aborted :', postInfo)
                 }
+            } else {
+                console.log('! Blocked expired >', postInfo)
             }
         }
         setTimeout(()=>{this.send.call(this)}, timeout*1000)
@@ -88,7 +91,7 @@ function tell(pokemon) {        // notification content
         (pokemon.weather != 0 ? ' +' : ' –')
         : ''
 
-    let despawnText = new Date(pokemon.despawn *1000).toTimeString().slice(0,8)
+    let despawnText = pokemon.despawn.date().hhmmss()
 
     let cpText = (pokemon.cp >= 0)? pokemon.cp + 'CP | ' : ''
     let adsText = (pokemon.iv >= 0)? pokemon.attack + '/' + pokemon.defence + '/' + pokemon.stamina + ' | ' : ''

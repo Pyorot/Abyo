@@ -19,11 +19,24 @@ function fetch(inserted='', bounds='', pokemon='') {
             .set('authority', 'londonpogomap.com')
             .set('referer', 'https://londonpogomap.com/')
             .set('x-requested-with', 'XMLHttpRequest')
-            .then(data => resolve(data.body))
-            .catch(err => {
-                error(JSON.stringify(err.response, null, 4))
-                error('x ERROR LPM:', 'failed to fetch', inserted, bounds)
-                reject('LPM')
+            .then(data => {
+                data = data.body
+                if (data.pokemons && data.meta) {
+                    resolve(data)
+                } else {
+                    error('x ERROR LPM: returned garbage ', inserted, bounds)
+                    reject('garbage')
+                }
             })
+            .catch(err => {
+                error('x ERROR LPM: failed to fetch (http);', inserted, bounds)
+                if (err.response) {
+                    error('       http:', err.response.status)
+                } else {
+                    error(JSON.stringify(err, null, 4))
+                }
+                reject('http')
+            })
+            setTimeout(() => reject('timeout'), 10*1000)    // manual rejection after 10s (to prevent hanging awaiting reply)
     })
 }

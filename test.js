@@ -1,5 +1,6 @@
 // .load test.js in Node REPL, on top of whatever's being tested
 require('dotenv').load()
+require('./date.js')
 
 _rP = {         // a non-expired raw Pokemon
     "pokemon_id": "193",
@@ -21,8 +22,8 @@ _rP = {         // a non-expired raw Pokemon
 }
 
 _P = {          // Pokemon(_rP)
-    id: '193',
-    name: 'Yanma',
+    id: '149',
+    name: 'Dragonite',
     point: [ 51.475071, -0.279798 ],
     despawn: 1512513386,
     sig: '1512513386/51.64146084/-0.28978798',
@@ -39,7 +40,8 @@ _P = {          // Pokemon(_rP)
     gender: 'F',
     form: 0,
     letter: '',
-    annotated: false
+    annotated: false,
+    location: {postcode: "W10"}
 }
 
 _PLong = {          // Pokemon with longest possible info
@@ -85,7 +87,7 @@ async function _fetch(since, bounds, pokemon) {    // fetch and save raw to lpm.
 }
 
 function _run() {    // read raw from lpm.json and run procedure
-    let now = String(Date.now())
+    let now = String(new Date.number())
     console.log(now, 'Start.')
     let data
     try {data = JSON.parse(fs.readFileSync('./scrap/lpm.json'))} catch (err) {console.error(err); return}

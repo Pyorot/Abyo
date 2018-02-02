@@ -1,5 +1,6 @@
 const request = require('superagent')
 const error = require('./error.js')
+require('./date.js')
 
 module.exports.post = post
 module.exports.discord = discord
@@ -17,12 +18,11 @@ function post(pokemon, channel) {       // constructs full notification, then se
         footer: {}
     }
 
-    let now = Date.now()/1000                                                   // calculate time remaining just before sending
-    if (pokemon.despawn - now <= 2*60) {return Promise.reject('expired')}       // throw expired Pokemon exception
-    let timeRemaining = new Date((pokemon.despawn - now) *1000).toTimeString().slice(3,8)
-    embed.footer.text = 'sent at ' + new Date(now *1000).toTimeString().slice(0,8)
-
-    return discord(channel, {content: pokemon.text.replace("#TIME", timeRemaining), embed: embed})
+    let nowTime = new Date(); let now = nowTime.number()                // calculate time remaining just before sending
+    let timeRemaining = pokemon.despawn - now
+    if (timeRemaining <= 2*60) {return Promise.reject('expired')}       // throw expired Pokemon exception
+    embed.footer.text = 'sent at ' + nowTime.hhmmss()
+    return discord(channel, {content: pokemon.text.replace("#TIME", timeRemaining.date().mmss()), embed: embed})
 }
 
 function discord(channel, message) {    // Discord send-message wrapper
@@ -39,12 +39,14 @@ function discord(channel, message) {    // Discord send-message wrapper
             .send(JSON.stringify(message))
             .then(resolve)
             .catch(err => {
-                if (err.response) {   // for HTTP errors (rather than manual rejections)
+                error('x ERROR Discord:', '(http) failed to post:', channel, logTitle)
+                if (err.response && err.response.text) {
                     let logTitle = message.content.slice(0,30).replace(/\n/g," ")
-                    error('x ERROR Discord:', '(http) failed to post:', channel, logTitle,
-                                '\n      - status:', err.response.status,
-                                '\n      - discord code:', JSON.parse(err.response.text).code,
-                                '\n      - discord message:', JSON.parse(err.response.text).message)
+                    error('      - status:', err.response.status,
+                        '\n      - discord code:', JSON.parse(err.response.text).code,
+                        '\n      - discord message:', JSON.parse(err.response.text).message)
+                } else {
+                    error(JSON.stringify(err, null, 4))
                 }
                 reject('http')
             })
