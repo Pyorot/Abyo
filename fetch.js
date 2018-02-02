@@ -13,7 +13,7 @@ function fetch(inserted='', bounds='', pokemon='') {
             .get(url)
             .timeout({
                 response: 5*1000,  // to start receiving
-                deadline: 15*1000, // to finish receiving
+                deadline: 10*1000, // to finish receiving
             })
             .set('user-agent', "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36")
             .set('authority', 'londonpogomap.com')

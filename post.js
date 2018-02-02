@@ -39,9 +39,8 @@ function discord(channel, message) {    // Discord send-message wrapper
             .send(JSON.stringify(message))
             .then(resolve)
             .catch(err => {
-                error('x ERROR Discord:', '(http) failed to post:', channel, logTitle)
+                error('x ERROR Discord:', '(http) failed to post:', channel, message.content.slice(0,30).replace(/\n/g," "))
                 if (err.response && err.response.text) {
-                    let logTitle = message.content.slice(0,30).replace(/\n/g," ")
                     error('      - status:', err.response.status,
                         '\n      - discord code:', JSON.parse(err.response.text).code,
                         '\n      - discord message:', JSON.parse(err.response.text).message)

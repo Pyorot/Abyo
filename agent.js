@@ -54,7 +54,7 @@ Agent.prototype.send = async function() {
                     timeout = 5
                     this.sendQueue.push(item)
                 } else {                            // abort send
-                    console.log('x ERROR agent: delivery failed, aborted :', postInfo)
+                    error('x ERROR agent: delivery failed, aborted :', postInfo)
                 }
             } else {
                 console.log('! Blocked expired >', postInfo)
