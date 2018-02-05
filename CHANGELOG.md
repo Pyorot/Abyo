@@ -1,6 +1,15 @@
 ## Changelog
 
-### 1.1 (6/12)
+### 1.2 (05/02/2018)
+This update improves the stability and load analytics of the bot, ready for scaling.
+- **improved error handling and stability**, learning from over two months of live operation. All HTTP requests are now explicitly rejected after 10s of waiting, resolving the chronic Agent hanging problem. Data from HTTP is now accessed more safely. This removes all known crashing errors.
+- **improved error and info logging**, including the coverage of descriptive error messages, the format, and with the introduction of logging to file via error.js. More information about scaling-relevant metrics (e.g. times taken) is logged in console.
+- **new AUTORUN switch in .env** determines whether the bot should run upon load, or not (for REPL mode).
+- **the interval between fetches is now increased if the source crashes**; pinging every 2s stops if the source doesn't send new data for about a minute, in favour of every 30s.
+- **postcodes in data are now correctly clipped to the Thames**, making it easier to reliably determine travel times to spawns.
+
+### 1.1 (06/12/2017)
+This update improves the flexibility of the bot.
 - **locate.js now uses pre-computed bounding boxes to avoid testing point-in-polygon in most cases**; postcode and borough search are now over 10 times faster. Polygon data now contains bounding boxes at `Feature.properties.bbox`.
 - **new file geo.js abstracts out the underlying geographical functions**, away from the London data routines. It is importable into each Agent, meaning Agents can now filter by user-defined polygon.
 - **all geographical endpoints use a standard format for points**, `point = [lat,lng]`, which is also now used for Pokemon coordinates, at `Pokemon.point`.
@@ -9,5 +18,5 @@
 - **Postcodes are now pre-processed**, so filterable.
 - **All geographical data is now standard (containerised) GeoJSON.**
 
-### 1.0 (24/11)
+### 1.0 (24/11/2017)
 *Initial release*.

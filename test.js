@@ -100,9 +100,3 @@ function _run() {    // read raw from lpm.json and run procedure
     })
     console.log(now, 'Resolved.')
 }
-
-/* agent.js
-const test = new Agent('test')
-test.channels[3]='123' // fake channel ID
-test.test(b)
-*/

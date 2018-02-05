@@ -21,43 +21,20 @@ function load() {
     })
 }
 
-// Run one instance of process = fetch > parse > filter + send
-async function run(since, bounds, pokemon) {
-    let startTime = new Date(); let now = startTime.number()
-    console.log(now, 'Start.')
-    let data
-    try {data = await fetch(since,bounds,pokemon)} catch (error) {return}
-    console.log(now, 'Fetched.')
-    data.pokemons.forEach(rawPokemon => {
-        let pokemon = new Pokemon(rawPokemon)
-        agents.forEach(agent => {
-            try {agent.test(pokemon)} catch (error) {
-                error(error)
-                error("x ERROR agent", agent.name, ": failed to process", sig)
-            }
-        })
-    })
-    console.log(now, 'Resolved.')
-}
+inserted = 0                    // a timecode representing when the data was updated
+cache = {}                      // to deal with same data appearing in two consecutive fetches sometimes
+pending = undefined             // represents the pending loop iteration
+oldFetches = 0; retryTime = 1.8 // how many times in a row old data was fetched and when to try again for new data
 
-// Run loop of process
-inserted = 0            // a timecode representing when the data was updated
-cache = {}              // to deal with same data appearing in two consecutive fetches sometimes
-pending = undefined     // represents the pending loop iteration
-oldFetches = 0; retryTime = 2
-async function go() {
-    stop()              // clean exit of previous iteration
+// Run one instance of process = fetch > parse > filter + send.
+// Returns timeout in seconds for next intended call of self.
+async function run() {
     let startTime = new Date(); let now = startTime.number()
-    let sendingString = ''
-    for (agent of agents) {
-        if (agent.sending) {sendingString += agent.name + ', '} else
-        if (agent.sendQueue.length != 0) {sendingString += agent.name + '*, '}
-    }
-    if (!sendingString) {sendingString = '[clear]'}
+    let sendingStatus = agents.map(agent => agent.sending ? agent.name : '').filter(x => x).join(', ')
     console.log('\n# Start |', startTime.hhmmss(),
                 '| from', inserted.date().hhmmss(),
                 '| agents', agents.length,
-                '| sending:', sendingString)
+                '| sending:', sendingStatus ? sendingStatus : '[clear]')
 
     // fetch data
     let data; let newInserted; let spawns; let length
@@ -66,9 +43,9 @@ async function go() {
         newInserted = parseInt(data.meta.inserted)
         spawns = data.pokemons
         length = spawns.length
-    } catch (error) {
+    } catch (err) {
         console.log('x ERROR index: failed to fetch; retrying in 10s.')
-        pending = setTimeout(go, 10*1000); return
+        return 10
     }
 
     // calculate when to continue
@@ -77,14 +54,14 @@ async function go() {
       :(newInserted > inserted      ? 'new data'
       :                               'old data')
     if (newInserted > inserted) {inserted = newInserted}
-    let delay = startTime.number() - inserted
+    let delay = now - inserted
     let callAt =
-        Case == 'new data'          ? inserted + 30 + Math.max(2.5, delay - 1)
+        Case == 'new data'          ? inserted + 30 + Math.max(2, delay - 1.2)
                                     : (delay < 33 ? inserted + 33 : now + retryTime)
     if (Case != 'new data') {
-        oldFetches++; if (oldFetches > 30) {retryTime = 30}
+        oldFetches++;   if (oldFetches > 30) {retryTime = 30}
     } else {
-        oldFetches = 0; retryTime = 2
+        oldFetches = 0; retryTime = 1.8
     }
     console.log('- Fetched |', Case,
                 '| to', newInserted.date().hhmmss(),
@@ -101,8 +78,8 @@ async function go() {
             if (!cache[sig]) {
                 let pokemon = new Pokemon(rawPokemon)
                 agents.forEach(agent => {
-                    try {agent.test(pokemon)} catch (error) {
-                        error(error)
+                    try {agent.test(pokemon)} catch (err) {
+                        error(JSON.stringify(err, null, 4))
                         error("x ERROR agent", agent.name, ": failed to process", sig)
                     }
                 })
@@ -120,11 +97,10 @@ async function go() {
     }
 
     // continue
-    pending = setTimeout(go, (callAt - now)*1000)
+    return callAt - now
 }
 
-// Stop process loop
+// Process loop
+async function go() {stop(); pending = setTimeout(go, await run()*1000)}
 function stop() {clearTimeout(pending)}
-
-// Live usage
-// load(); go()
+if (process.env.AUTORUN == 'true') {load(); go()}
