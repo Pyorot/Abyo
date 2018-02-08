@@ -1,6 +1,7 @@
 if (process.env.LOCATE == 'true') {var locate = require('./locate.js')}
 
 var pokedex = require('./data/pokemon/pokedex.json')
+var pokefam = require('./data/pokemon/pokefam.json')
 var moves = require('./data/pokemon/moves.json')
 var stats = require('./data/pokemon/stats.json')
 var cpms = require('./data/pokemon/cpms.json')
@@ -31,6 +32,7 @@ function findLevel(id, cp, attack, defence, stamina) {
 function Pokemon(rawPokemon) {                          // the Pokemon class returned by this module
     this.id = parseInt(rawPokemon.pokemon_id)
     this.name = pokedex[this.id]                        // text (always known)
+    this.fam = pokefam[this.id]                         // text (always known)
     this.point = [parseFloat(rawPokemon.lat), parseFloat(rawPokemon.lng)]
     this.despawn = parseInt(rawPokemon.despawn)
     this.sig = rawPokemon.despawn + '/' + rawPokemon.lat + '/' + rawPokemon.lng         // unique spacetime ID
