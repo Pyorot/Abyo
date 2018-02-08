@@ -1,7 +1,7 @@
 {
   "name": "abyo",
   "version": "1.2.0",
-  "description": "Pyobot Notifier (Abstract-filter, Node.js)",
+  "description": "Pyobot Notifier (abstract-filter, Node.js)",
   "main": "index.js",
   "scripts": {
     "test": "test.js"

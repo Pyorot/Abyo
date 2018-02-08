@@ -1,4 +1,4 @@
-var locate = require('./locate.js')
+if (process.env.LOCATE == 'true') {var locate = require('./locate.js')}
 
 var pokedex = require('./data/pokemon/pokedex.json')
 var moves = require('./data/pokemon/moves.json')
@@ -52,6 +52,9 @@ function Pokemon(rawPokemon) {                          // the Pokemon class ret
     this.form = parseInt(rawPokemon.form)               // original (0 if none, -1 if unknown)
     this.letter = (this.id == 201 && this.form >= 1 && this.form <= 26)? String.fromCharCode(this.form + 64) : "" // text ("" if none/unknown)
 
-    this.location = {postcode: locate.gP(this.point)}
+    this.location = {}
+    if (process.env.LOCATE == 'true') {
+        this.location.postcode = locate.gP(this.point)
+    }
     this.annotated = false                              // every Pokemon is parsed; those that will be sent out are annotated
 }

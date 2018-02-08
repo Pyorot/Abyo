@@ -33,7 +33,7 @@ function fetch(inserted='', bounds='', pokemon='') {
                 if (err.response) {
                     error('       http:', err.response.status)
                 } else {
-                    error(JSON.stringify(err, null, 4))
+                    error(JSON.stringify(err))
                 }
                 reject('http')
             })
