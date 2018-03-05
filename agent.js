@@ -24,7 +24,7 @@ Agent.prototype.test = function(pokemon) {
             if (channel) {
                 this.sendQueue.push([pokemon, channel, destination])
             } else {
-                error('x ERROR agent', this.name, ': no channel registered as:', destination)
+                error(`x AGENT: ${this.name} has no channel registered as ${destination}.`)
             }
         }
         // signal that sending should be happening
@@ -47,14 +47,12 @@ Agent.prototype.send = async function() {
             console.log('> Sent >', new Date().ss(), '>', postInfo)
         } catch (err) {                             // err = 'expired', 'timeout', 'http'
             if (err != 'expired') {
-                error('x ERROR agent:', err, ':', postInfo)
-                item[3]++
-                if (item[3] < 3) {                  // retry send
-                    error('.       agent: retrying send in 5s, attempt', item[3]+1, ':', postInfo)
+                item[3]++                           // = attempt number
+                let action = item[3] < 3 ? 'retry' : 'abort'
+                error(`x AGENT: ${this.name} failed to post (${err}) | attempt ${item[3]} (${action}) | ${postInfo}`)
+                if (action == 'retry') {
                     timeout = 5
                     this.sendQueue.push(item)
-                } else {                            // abort send
-                    error('x ERROR agent: delivery failed, aborted :', postInfo)
                 }
             } else {
                 console.log('! Blocked expired >', postInfo)
@@ -98,7 +96,7 @@ function tell(pokemon) {        // notification content
     let movesText = (pokemon.move1 && pokemon.move2)? pokemon.move1 + '/' + pokemon.move2 + ' | ' : ''
     let genderText = pokemon.gender? pokemon.gender : ''
 
-    let url = 'http://www.google.com/maps/place/' + pokemon.point[0] + ',' + pokemon.point[1]
+    let url = 'http://maps.google.com/maps?q=' + pokemon.point[0] + ',' + pokemon.point[1]
     
     return pokemon.name + letterText + ivText + levelText + weatherText
          + '\n| ' + pokemon.locationText

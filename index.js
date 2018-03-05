@@ -44,7 +44,7 @@ async function run() {
         spawns = data.pokemons
         length = spawns.length
     } catch (err) {
-        console.log('x ERROR index: failed to fetch; retrying in 10s.')
+        error(`x LPM: failed to fetch (${err}); retrying in 10s.`)
         return 10
     }
 
@@ -79,8 +79,8 @@ async function run() {
                 let pokemon = new Pokemon(rawPokemon)
                 agents.forEach(agent => {
                     try {agent.test(pokemon)} catch (err) {
-                        error(JSON.stringify(err, null, 4))
-                        error("x ERROR agent", agent.name, ": failed to process", sig)
+                        error('x AGENT [unknown dump]:', JSON.stringify(err))
+                        error(`x AGENT: ${agent.name} failed to process ${sig}.`)
                     }
                 })
                 newCache[sig] = true
