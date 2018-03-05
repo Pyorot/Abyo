@@ -1,18 +1,12 @@
 var channels = {
-    y: "345497021182115840"
+    "Larvitar": "345497021182115840",
+    "Dratini":  "411697059779969034"
 }
 
 function filter(pokemon) {
-    switch (pokemon.name) {
-        case "Dratini":
-        case "Dragonair":
-        case "Larvitar":
-        case "Pupitar":
-            if (pokemon.ivPercent >= 93) {return "y"}
-            break
-        case "Dragonite":
-        case "Tyranitar":
-            if (pokemon.ivPercent >= 87) {return "y"}
+    if (["Larvitar","Dratini"].includes(pokemon.fam)) {
+        if (pokemon.ivPercent >= 91 && (pokemon.ivPercent >= 96 || pokemon.attack == 15 || pokemon.level >= 28)) {return pokemon.fam}
+        if (["Tyranitar","Dragonite"].includes(pokemon.name) && pokemon.level >= 25 && (pokemon.ivPercent >= 82 || pokemon.attack >= 14)) {return pokemon.fam}
     }
 }
 
